@@ -8,7 +8,7 @@ __version__ = "0.0.0"
 
 REPO_NAME = "RAG"
 AUTHOR_USER_NAME = "siraj"
-SRC_REPO = "rag"
+SRC_REPO = "RAG"
 AUTHOR_EMAIL = "shaiksirajuddin9949@gmail.com"
 
 
