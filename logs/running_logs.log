@@ -1,0 +1,239 @@
+[2024-06-02 22:46:42,941: INFO: stage_01_data_ingestion: >>>>>>>> Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-02 22:46:42,955: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-02 22:46:42,956: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-02 22:46:42,957: ERROR: stage_01_data_ingestion: yaml file is empty]
+Traceback (most recent call last):
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\utils\common.py", line 32, in read_yaml
+    return ConfigBox(content)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 259, in __init__
+    raise BoxValueError("First argument must be mapping or iterable")
+box.exceptions.BoxValueError: First argument must be mapping or iterable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_01_data_ingestion.py", line 23, in <module>
+    obj.main()
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_01_data_ingestion.py", line 12, in main
+    config = ConfigurationManager()
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\config\configuration.py", line 14, in __init__
+    self.params = read_yaml(params_filepath)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\ensure\main.py", line 849, in __call__
+    return_val = self.f(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\utils\common.py", line 34, in read_yaml
+    raise ValueError("yaml file is empty")
+ValueError: yaml file is empty
+[2024-06-02 22:47:26,155: INFO: stage_01_data_ingestion: >>>>>>>> Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-02 22:47:26,157: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-02 22:47:26,160: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-02 22:47:26,164: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-02 22:47:26,165: ERROR: stage_01_data_ingestion: "'ConfigBox' object has no attribute 'data_ingestion_config'"]
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 503, in __getitem__
+    return super().__getitem__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'data_ingestion_config'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 536, in __getattr__
+    value = self.__getitem__(item, _ignore_default=True)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 524, in __getitem__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'data_ingestion_config'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 538, in __getattr__
+    value = object.__getattribute__(self, item)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigBox' object has no attribute 'data_ingestion_config'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\config_box.py", line 28, in __getattr__
+    return super().__getattr__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 552, in __getattr__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'data_ingestion_config'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 503, in __getitem__
+    return super().__getitem__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'data_ingestion_config'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 536, in __getattr__
+    value = self.__getitem__(item, _ignore_default=True)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 524, in __getitem__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'data_ingestion_config'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 538, in __getattr__
+    value = object.__getattribute__(self, item)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigBox' object has no attribute 'data_ingestion_config'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_01_data_ingestion.py", line 23, in <module>
+    obj.main()
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_01_data_ingestion.py", line 14, in main
+    data_ingestion_config = config.get_data_ingestion_config()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\config\configuration.py", line 18, in get_data_ingestion_config
+    config = self.config.data_ingestion_config
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\config_box.py", line 30, in __getattr__
+    return super().__getattr__(item.lower())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 552, in __getattr__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'data_ingestion_config'"
+[2024-06-02 22:48:31,453: INFO: stage_01_data_ingestion: >>>>>>>> Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-02 22:48:31,473: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-02 22:48:31,475: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-02 22:48:31,479: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-02 22:48:31,482: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-06-02 22:48:31,484: ERROR: stage_01_data_ingestion: "'ConfigBox' object has no attribute 'source_uri'"]
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 503, in __getitem__
+    return super().__getitem__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 536, in __getattr__
+    value = self.__getitem__(item, _ignore_default=True)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 524, in __getitem__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 538, in __getattr__
+    value = object.__getattribute__(self, item)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigBox' object has no attribute 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\config_box.py", line 28, in __getattr__
+    return super().__getattr__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 552, in __getattr__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 503, in __getitem__
+    return super().__getitem__(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 536, in __getattr__
+    value = self.__getitem__(item, _ignore_default=True)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 524, in __getitem__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 538, in __getattr__
+    value = object.__getattribute__(self, item)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ConfigBox' object has no attribute 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_01_data_ingestion.py", line 23, in <module>
+    obj.main()
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_01_data_ingestion.py", line 14, in main
+    data_ingestion_config = config.get_data_ingestion_config()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\config\configuration.py", line 24, in get_data_ingestion_config
+    source_uri=config.source_uri,
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\config_box.py", line 30, in __getattr__
+    return super().__getattr__(item.lower())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\box\box.py", line 552, in __getattr__
+    raise BoxKeyError(str(err)) from _exception_cause(err)
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'source_uri'"
+[2024-06-02 22:49:14,858: INFO: stage_01_data_ingestion: >>>>>>>> Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-02 22:49:14,872: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-02 22:49:14,875: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-02 22:49:14,877: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-02 22:49:14,878: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-06-02 22:49:14,878: INFO: data_ingestion: File Doesn't Exist!>>> let's Download]
+[2024-06-02 22:49:14,891: ERROR: stage_01_data_ingestion: No connection adapters were found for 'src/stock_agent/components/stock_names.txthttps://raw.githubusercontent.com/mrdbourke/simple-local-rag/main/human-nutrition-text.pdf']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_01_data_ingestion.py", line 23, in <module>
+    obj.main()
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_01_data_ingestion.py", line 16, in main
+    data_ingestion.download_data()
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\data_ingestion.py", line 14, in download_data
+    response = requests.get(self.config.source_uri)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\requests\sessions.py", line 697, in send
+    adapter = self.get_adapter(url=request.url)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\requests\sessions.py", line 794, in get_adapter
+    raise InvalidSchema(f"No connection adapters were found for {url!r}")
+requests.exceptions.InvalidSchema: No connection adapters were found for 'src/stock_agent/components/stock_names.txthttps://raw.githubusercontent.com/mrdbourke/simple-local-rag/main/human-nutrition-text.pdf'
+[2024-06-02 22:50:12,212: INFO: stage_01_data_ingestion: >>>>>>>> Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-02 22:50:12,231: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-02 22:50:12,232: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-02 22:50:12,233: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-02 22:50:12,234: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-06-02 22:50:12,235: INFO: data_ingestion: File Doesn't Exist!>>> let's Download]
+[2024-06-02 22:51:10,205: INFO: data_ingestion: >>>>>> Downloaded to artifacts/data_ingestion/human-nutrition-text.]
+[2024-06-02 22:51:10,215: INFO: stage_01_data_ingestion: >>>>>>>> Data Ingestion stage Completed <<<<<<<<<<]
+[2024-06-02 22:54:31,526: INFO: stage_01_data_ingestion: >>>>>>>> Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-02 22:54:31,543: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-02 22:54:31,546: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-02 22:54:31,548: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-02 22:54:31,550: INFO: common: created directory at: artifacts/data_ingestion]
+[2024-06-02 22:54:31,551: INFO: data_ingestion: File Already Exist!]
+[2024-06-02 22:54:31,553: INFO: stage_01_data_ingestion: >>>>>>>> Data Ingestion stage Completed <<<<<<<<<<]
