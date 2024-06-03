@@ -26,9 +26,11 @@ if __name__ == "__main__":
     try:
         logger.info(f">>>>>>>> {STAGE_NAME} Started <<<<<<<<<<<<")
         obj = SearchAnswerPipeline()
-        query = input("Enter The Query: ")
-        output_text = obj.main(query=query)
-        print(output_text)
+        query = ""
+        while query != ".exit":
+            query = input("Enter The Query: ")
+            output_text = obj.main(query=query)
+            print(output_text)
         logger.info(f">>>>>>>> {STAGE_NAME} Completed <<<<<<<<<<")
     except Exception as e:
         logger.exception(e)
