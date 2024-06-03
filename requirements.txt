@@ -9,3 +9,10 @@ python-dotenv
 joblib
 types-PyYAML
 -e .
+
+
+
+pyMuPDF
+setuptools
+wheel
+spacy

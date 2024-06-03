@@ -4,4 +4,10 @@ data_ingestion:
     root_dir: artifacts/data_ingestion
     source_uri: https://raw.githubusercontent.com/mrdbourke/simple-local-rag/main/human-nutrition-text.pdf
     local_data_file: artifacts/data_ingestion/human-nutrition-text.pdf
+    chunk_size: 10
+    device_name: cpu
+    model_name: all-mpnet-base-v2
+    min_token_length: 30
+    index_name: rag-index
+
   

@@ -1,5 +1,5 @@
 from RAG.constants import *
-from RAG.entity.config_entity import DataIngestionConfig
+from RAG.entity.config_entity import DataIngestionConfig, SearchConfig
 from RAG.utils.common import create_directories, read_yaml
 
 
@@ -22,7 +22,13 @@ class ConfigurationManager:
         data_ingestion_config = DataIngestionConfig(
             root_dir=config.root_dir,
             source_uri=config.source_uri,
-            local_data_file=config.local_data_file
+            local_data_file=config.local_data_file,
+            chunk_size=config.chunk_size,
+            device_name=config.device_name,
+            model_name=config.model_name,
+            min_token_length=config.min_token_length,
+            index_name=config.index_name,
         )
 
         return data_ingestion_config
+    

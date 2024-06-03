@@ -6,3 +6,8 @@ class DataIngestionConfig:
     root_dir: Path
     source_uri: str
     local_data_file: Path
+    chunk_size: int
+    device_name: str
+    model_name: str
+    min_token_length: int
+    index_name: str
