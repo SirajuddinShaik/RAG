@@ -11,3 +11,8 @@ class DataIngestionConfig:
     model_name: str
     min_token_length: int
     index_name: str
+
+@dataclass(frozen=True)
+class SearchConfig:
+    index_name: str
+    top: int

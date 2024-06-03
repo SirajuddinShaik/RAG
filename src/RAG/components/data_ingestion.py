@@ -1,6 +1,4 @@
 import os
-from pydoc import doc
-from re import split
 import re
 import pandas as pd
 import fitz

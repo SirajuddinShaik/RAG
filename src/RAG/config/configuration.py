@@ -32,3 +32,7 @@ class ConfigurationManager:
 
         return data_ingestion_config
     
+
+    def get_search_config(self) -> SearchConfig:
+
+        config = self.config.data

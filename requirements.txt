@@ -16,3 +16,5 @@ pyMuPDF
 setuptools
 wheel
 spacy
+sentence_transformers
+pinecone-client

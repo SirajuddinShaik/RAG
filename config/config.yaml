@@ -10,4 +10,7 @@ data_ingestion:
     min_token_length: 30
     index_name: rag-index
 
+search_and_answer:
+    index_name: rag-index
+    top: 5
   
