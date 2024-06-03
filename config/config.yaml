@@ -10,7 +10,11 @@ data_ingestion:
     min_token_length: 30
     index_name: rag-index
 
-search_and_answer:
+search_and_retrive:
     index_name: rag-index
-    top: 5
+    top_k: 5
+    device_name: cpu
+    embed_model_name: all-mpnet-base-v2
+    data_file: artifacts/data_ingestion/data.csv
+    model_id: google/gemma-2b-it
   

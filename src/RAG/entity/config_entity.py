@@ -15,4 +15,8 @@ class DataIngestionConfig:
 @dataclass(frozen=True)
 class SearchConfig:
     index_name: str
-    top: int
+    top_k: int
+    device_name: str
+    embed_model_name: str
+    data_file: Path
+    model_id: str

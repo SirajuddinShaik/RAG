@@ -11,10 +11,12 @@ from pinecone import Pinecone, ServerlessSpec
 
 from RAG.entity.config_entity import DataIngestionConfig
 from RAG import logger
+from RAG.utils.common import setup_env
 
 class DataIngestion:
     def __init__(self, config: DataIngestionConfig):
         self.config = config
+        setup_env()
         self.embedding_model = SentenceTransformer(
             model_name_or_path=self.config.model_name, 
             device=self.config.device_name
@@ -88,7 +90,7 @@ class DataIngestion:
                 chunk_dict = {}
                 joined_chunk = "".join(sentence_chunk).replace("  ", " ").strip()
                 joined_chunk = re.sub(r'\.([A-Z])',r'. \1', joined_chunk)
-                chunk_dict["index"] = f"{page_no}_{i}"
+                chunk_dict["index"] = f"{page_no+1}_{i}"
                 chunk_dict["sentence_chunk"] = joined_chunk
                 chunk_dict["chunk_char_count"] = len(joined_chunk)
                 chunk_dict["chunk_word_count"] = len(joined_chunk.split())
@@ -102,8 +104,10 @@ class DataIngestion:
         self.embedding_model.to(self.config.device_name)
         logger.info(">>>>>>>> Embedding Started <<<<<<<<<")
         df = pd.DataFrame(pages_and_chunks)
-        pages_and_chunks_over_min_token_len = df[df["chunk_token_count"] > self.config.min_token_length].to_dict(orient="records")
-        text_chunks = [item["sentence_chunk"] for item in pages_and_chunks_over_min_token_len]
+        pages_and_chunks_over_min_token_len = df[df["chunk_token_count"] > self.config.min_token_length]
+        pages_and_chunks_over_min_token_len.set_index('index', inplace=True)
+        pages_and_chunks_over_min_token_len.to_csv(f"{self.config.root_dir}/data.csv")
+        text_chunks = [item["sentence_chunk"] for item in pages_and_chunks_over_min_token_len.to_dict(orient="records")]
         text_chunks_embeddings = self.embedding_model.encode(
             text_chunks,
             batch_size = 32,

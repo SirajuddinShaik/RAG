@@ -35,4 +35,14 @@ class ConfigurationManager:
 
     def get_search_config(self) -> SearchConfig:
 
-        config = self.config.data
+        config = self.config.search_and_retrive
+
+        search_retrival_config = SearchConfig(
+            index_name=config.index_name,
+            top_k=config.top_k,
+            device_name=config.device_name,
+            embed_model_name=config.embed_model_name,
+            data_file=config.data_file,
+            model_id=config.model_id,
+        )
+        return search_retrival_config
