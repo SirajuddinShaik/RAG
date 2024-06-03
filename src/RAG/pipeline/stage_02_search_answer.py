@@ -10,8 +10,8 @@ STAGE_NAME = "Search Answer stage"
 
 class SearchAnswerPipeline:
     def __init__(self) -> None:
-        login(token=os.environ["HUGGINGFACE_HUB_TOKEN"])
         setup_env()
+        login(token=os.environ["HUGGINGFACE_HUB_TOKEN"])
         config = ConfigurationManager()
         search_config = config.get_search_config()
         self.query_answer = SearchAndAnswer(search_config)
