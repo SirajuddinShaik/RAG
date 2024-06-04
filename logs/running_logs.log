@@ -845,3 +845,62 @@ TypeError: list indices must be integers or slices, not str
 [2024-06-03 21:57:50,712: INFO: common: yaml file: schema.yaml loaded successfully]
 [2024-06-03 21:57:51,791: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
 [2024-06-03 21:58:19,210: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Completed <<<<<<<<<<]
+[2024-06-04 13:00:14,987: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-04 13:00:15,567: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-04 13:00:15,581: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-04 13:00:15,586: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-04 13:00:16,403: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-04 13:00:38,815: ERROR: stage_02_search_answer: 'SearchAndAnswer' object has no attribute 'tokenizer']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 32, in <module>
+    output_text = obj.main(query=query)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 22, in main
+    output_text = self.query_answer.ask(query, query_results)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 158, in ask
+    answer = self.ask_cpu(query, context_items)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 132, in ask_cpu
+    prompt = self.prompt_formatter(query=query,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 89, in prompt_formatter
+    prompt = self.tokenizer.apply_chat_template(conversation=dialogue_template,
+             ^^^^^^^^^^^^^^
+AttributeError: 'SearchAndAnswer' object has no attribute 'tokenizer'
+[2024-06-04 13:01:41,097: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-04 13:01:42,589: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-04 13:01:42,594: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-04 13:01:42,595: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-04 13:01:43,304: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-04 13:04:33,780: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-04 13:04:34,339: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-04 13:04:34,350: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-04 13:04:34,353: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-04 13:04:35,254: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-04 13:07:46,812: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-04 13:07:47,617: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-04 13:07:47,617: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-04 13:07:47,617: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-04 13:07:49,923: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-04 13:22:01,604: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-04 13:22:05,154: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-04 13:22:05,155: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-04 13:22:05,156: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-04 13:22:09,045: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-04 15:41:37,064: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-04 15:41:37,885: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-04 15:41:37,888: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-04 15:41:37,890: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-04 15:41:39,163: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-04 15:41:48,326: ERROR: stage_02_search_answer: 'module' object is not subscriptable]
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 31, in <module>
+    prompt = prompts["detailed_prompt"]
+             ~~~~~~~^^^^^^^^^^^^^^^^^^^
+TypeError: 'module' object is not subscriptable
+[2024-06-04 15:45:35,172: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-04 15:45:36,016: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-04 15:45:36,018: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-04 15:45:36,021: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-04 15:45:36,784: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]

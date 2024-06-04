@@ -12,7 +12,7 @@ data_ingestion:
 
 search_and_retrive:
     index_name: rag-index
-    top_k: 5
+    top_k: 4
     device_name: cpu
     embed_model_name: all-mpnet-base-v2
     data_file: artifacts/data_ingestion/data.csv
