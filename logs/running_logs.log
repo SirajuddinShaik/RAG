@@ -904,3 +904,613 @@ TypeError: 'module' object is not subscriptable
 [2024-06-04 15:45:36,018: INFO: common: yaml file: params.yaml loaded successfully]
 [2024-06-04 15:45:36,021: INFO: common: yaml file: schema.yaml loaded successfully]
 [2024-06-04 15:45:36,784: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 12:30:15,881: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 12:30:15,881: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 12:30:15,881: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 12:30:15,881: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 12:30:15,881: ERROR: stage_02_search_answer: SearchAndAnswer.__init__() missing 1 required positional argument: 'pc_key']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 35, in <module>
+    obj = SearchAnswerPipeline()
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 17, in __init__
+    self.query_answer = SearchAndAnswer(search_config)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: SearchAndAnswer.__init__() missing 1 required positional argument: 'pc_key'
+[2024-06-05 12:33:15,698: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 12:33:15,698: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 12:33:15,716: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 12:33:15,717: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 12:33:15,718: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 12:33:22,971: ERROR: stage_02_search_answer: 'SearchAndAnswer' object has no attribute 'index']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 26, in chainlit_prompt
+    query_embeddings = self.query_answer.retrive_similar_enbeddings(query, pc_key)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 38, in retrive_similar_enbeddings
+    query_results = self.index.query(
+                    ^^^^^^^^^^
+AttributeError: 'SearchAndAnswer' object has no attribute 'index'
+[2024-06-05 12:33:52,545: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 12:33:52,560: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 12:33:52,565: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 12:33:52,566: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 12:33:52,566: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 12:34:00,253: ERROR: stage_02_search_answer: 'str' object has no attribute 'query']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 26, in chainlit_prompt
+    query_embeddings = self.query_answer.retrive_similar_enbeddings(query, pc_key)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 38, in retrive_similar_enbeddings
+    query_results = index.query(
+                    ^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'query'
+[2024-06-05 12:34:45,177: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 12:34:45,177: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 12:34:45,177: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 12:34:45,192: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 12:34:45,193: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 12:36:09,432: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 12:36:09,436: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 12:36:09,437: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 12:36:09,439: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 12:36:09,440: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 12:37:18,946: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 12:37:18,947: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 12:37:18,947: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 12:37:18,947: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 12:37:18,955: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 12:37:31,379: ERROR: stage_02_search_answer: 'SentenceTransformer' object has no attribute 'decode']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 49, in fetch_chunks
+    item["sentence_chunk"] = self.embedding_model.decode(item["values"])
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\torch\nn\modules\module.py", line 1709, in __getattr__
+    raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+AttributeError: 'SentenceTransformer' object has no attribute 'decode'
+[2024-06-05 16:01:45,468: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:01:45,474: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:01:45,475: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:01:45,477: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:01:45,478: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:02:02,270: ERROR: stage_02_search_answer: 'str' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 51, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'loc'
+[2024-06-05 16:02:11,313: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:02:11,319: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:02:11,321: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:02:11,322: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:02:11,324: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:02:22,529: ERROR: stage_02_search_answer: 'str' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 51, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'loc'
+[2024-06-05 16:24:39,437: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:24:39,445: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:24:39,447: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:24:39,450: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:24:39,451: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:24:43,997: ERROR: stage_02_search_answer: 'SearchAnswerPipeline' object has no attribute 'setup_pd']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.setup_pd({"slot-1": "C:/Users/shaik/Documents/Programing/ML/RAG/.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf", "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+    ^^^^^^^^^^^^
+AttributeError: 'SearchAnswerPipeline' object has no attribute 'setup_pd'
+[2024-06-05 16:25:40,087: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:25:40,102: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:25:40,103: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:25:40,107: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:25:40,108: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:25:44,622: ERROR: stage_02_search_answer: 'SearchAnswerPipeline' object has no attribute 'setup_pd']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.setup_pd({"slot-1": "C:/Users/shaik/Documents/Programing/ML/RAG/.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf", "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+    ^^^^^^^^^^^^
+AttributeError: 'SearchAnswerPipeline' object has no attribute 'setup_pd'
+[2024-06-05 16:26:07,907: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:26:07,907: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:26:07,924: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:26:07,926: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:26:07,928: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:26:12,253: ERROR: stage_02_search_answer: [Errno 2] No such file or directory: 'C:/Users/shaik/Documents/Programing/ML/RAG/.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf.csv']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.query_answer.setup_pd({"slot-1": "C:/Users/shaik/Documents/Programing/ML/RAG/.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf", "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 36, in setup_pd
+    self.dfs[slot] = pd.read_csv(f"{path}.csv")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\common.py", line 859, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/shaik/Documents/Programing/ML/RAG/.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf.csv'
+[2024-06-05 16:26:58,891: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:26:58,902: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:26:58,904: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:26:58,909: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:26:58,909: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:27:04,068: ERROR: stage_02_search_answer: [Errno 2] No such file or directory: 'c:/Users/shaik/Documents/Programing/ML/RAG/.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf.csv']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.query_answer.setup_pd({"slot-1": "c:/Users/shaik/Documents/Programing/ML/RAG/.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf", "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 36, in setup_pd
+    self.dfs[slot] = pd.read_csv(f"{path}.csv")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\common.py", line 859, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'c:/Users/shaik/Documents/Programing/ML/RAG/.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf.csv'
+[2024-06-05 16:27:52,064: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:27:52,064: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:27:52,072: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:27:52,074: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:27:52,076: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:27:56,469: ERROR: stage_02_search_answer: [Errno 2] No such file or directory: '.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf.csv']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.query_answer.setup_pd({"slot-1": ".files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf", "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 36, in setup_pd
+    self.dfs[slot] = pd.read_csv(f"{path}.csv")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\common.py", line 859, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '.files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf.csv'
+[2024-06-05 16:28:33,233: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:28:33,233: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:28:33,249: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:28:33,249: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:28:33,252: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:28:37,553: ERROR: stage_02_search_answer: [Errno 2] No such file or directory: '.files\\40a621e3-13c3-40a5-92be-f8700a50f3dc\\b30a2251-0a3a-446e-9319-91f90dae9bed.pdf.csv']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.query_answer.setup_pd({"slot-1": Path(".files/40a621e3-13c3-40a5-92be-f8700a50f3dc/b30a2251-0a3a-446e-9319-91f90dae9bed.pdf"), "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 36, in setup_pd
+    self.dfs[slot] = pd.read_csv(f"{path}.csv")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\common.py", line 859, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '.files\\40a621e3-13c3-40a5-92be-f8700a50f3dc\\b30a2251-0a3a-446e-9319-91f90dae9bed.pdf.csv'
+[2024-06-05 16:33:14,387: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:33:14,403: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:33:14,460: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:33:14,460: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:33:14,460: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:33:21,361: ERROR: stage_02_search_answer: [Errno 2] No such file or directory: 'artifacts/data_ingestion/data.csv.csv']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.query_answer.setup_pd({"slot-1": obj.search_config.data_file, "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 36, in setup_pd
+    self.dfs[slot] = pd.read_csv(f"{path}.csv")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\common.py", line 859, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/data_ingestion/data.csv.csv'
+[2024-06-05 16:34:34,197: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:34:34,201: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:34:34,203: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:34:34,204: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:34:34,206: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:34:45,629: ERROR: stage_02_search_answer: 'str' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 53, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'loc'
+[2024-06-05 16:41:23,718: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:41:23,718: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:41:23,725: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:41:23,726: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:41:23,727: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:41:34,278: ERROR: stage_02_search_answer: 'str' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 54, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'loc'
+[2024-06-05 16:42:29,739: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:42:29,755: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:42:29,755: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:42:29,761: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:42:29,763: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:42:40,687: ERROR: stage_02_search_answer: 'str' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 53, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'loc'
+[2024-06-05 16:43:36,350: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:43:36,350: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:43:36,350: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:43:36,350: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:43:36,361: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:43:46,793: ERROR: stage_02_search_answer: 'str' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 54, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'loc'
+[2024-06-05 16:46:31,090: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:46:31,090: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:46:31,090: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:46:31,106: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:46:31,109: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:46:40,809: ERROR: stage_02_search_answer: 'str' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 55, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'loc'
+[2024-06-05 16:47:58,165: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:47:58,165: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:47:58,165: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:47:58,165: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:47:58,180: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:48:09,158: ERROR: stage_02_search_answer: 'str' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 55, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'loc'
+[2024-06-05 16:48:57,138: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:48:57,142: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:48:57,144: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:48:57,146: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:48:57,147: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:49:06,666: ERROR: stage_02_search_answer: '1_1']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what is the book", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 54, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1103, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1343, in _getitem_axis
+    return self._get_label(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1293, in _get_label
+    return self.obj.xs(label, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\generic.py", line 4095, in xs
+    loc = index.get_loc(key)
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexes\range.py", line 349, in get_loc
+    raise KeyError(key)
+KeyError: '1_1'
+[2024-06-05 16:50:35,424: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:50:35,428: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:50:35,429: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:50:35,431: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:50:35,433: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:50:41,140: ERROR: stage_02_search_answer: [Errno 2] No such file or directory: 'artifacts/data_ingestion/data.csv.csv']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.query_answer.setup_pd({"slot-1": obj.search_config.data_file, "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 36, in setup_pd
+    self.dfs[slot] = pd.read_csv(f"{path}.csv")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\common.py", line 859, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/data_ingestion/data.csv.csv'
+[2024-06-05 16:50:49,346: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:50:49,353: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:50:49,356: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:50:49,358: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:50:49,360: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:50:53,563: ERROR: stage_02_search_answer: [Errno 2] No such file or directory: 'artifacts/data_ingestion/data.csv.csv']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 38, in <module>
+    obj.query_answer.setup_pd({"slot-1": obj.search_config.data_file, "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""})
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 36, in setup_pd
+    self.dfs[slot] = pd.read_csv(f"{path}.csv")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\parsers\readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\io\common.py", line 859, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/data_ingestion/data.csv.csv'
+[2024-06-05 16:51:07,609: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:51:07,609: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:51:07,609: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:51:07,609: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:51:07,625: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:51:18,515: ERROR: stage_02_search_answer: '1_1']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what are skills", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 54, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1103, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1343, in _getitem_axis
+    return self._get_label(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1293, in _get_label
+    return self.obj.xs(label, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\generic.py", line 4095, in xs
+    loc = index.get_loc(key)
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexes\range.py", line 349, in get_loc
+    raise KeyError(key)
+KeyError: '1_1'
+[2024-06-05 16:51:55,695: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:51:55,699: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:51:55,702: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:51:55,705: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:51:55,707: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:52:05,872: ERROR: stage_02_search_answer: '1_1']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what are skills", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 54, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1103, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1343, in _getitem_axis
+    return self._get_label(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1293, in _get_label
+    return self.obj.xs(label, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\generic.py", line 4095, in xs
+    loc = index.get_loc(key)
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexes\range.py", line 349, in get_loc
+    raise KeyError(key)
+KeyError: '1_1'
+[2024-06-05 16:53:58,279: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:53:58,294: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:53:58,297: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:53:58,299: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:53:58,300: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 16:54:08,581: ERROR: stage_02_search_answer: 'NoneType' object has no attribute 'loc']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what are skills", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 27, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 54, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'loc'
+[2024-06-05 16:55:14,137: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 16:55:14,153: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 16:55:14,154: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 16:55:14,154: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 16:55:14,158: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 17:10:37,763: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 17:10:37,765: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 17:10:37,765: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 17:10:37,765: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 17:10:37,778: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 17:10:48,004: ERROR: stage_02_search_answer: SearchAndAnswer.ask() takes 4 positional arguments but 5 were given]
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what are skills", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 28, in chainlit_prompt
+    output_text = self.query_answer.ask(query, query_results, prompt, hf_key)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: SearchAndAnswer.ask() takes 4 positional arguments but 5 were given
+[2024-06-05 23:27:06,513: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 23:27:06,520: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 23:27:06,521: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 23:27:06,522: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 23:27:06,523: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 23:27:12,295: ERROR: stage_02_search_answer: SearchAnswerPipeline.chainlit_prompt() missing 1 required positional argument: 'model']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what are skills", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1")
+TypeError: SearchAnswerPipeline.chainlit_prompt() missing 1 required positional argument: 'model'
+[2024-06-05 23:28:16,676: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 23:28:16,684: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 23:28:16,686: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 23:28:16,689: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 23:28:16,691: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 23:29:41,223: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 23:29:41,228: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 23:29:41,230: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 23:29:41,232: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 23:29:41,233: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 23:30:24,756: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 23:30:24,756: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 23:30:24,756: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 23:30:24,770: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 23:30:24,771: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 23:32:44,806: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 23:32:44,806: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 23:32:44,806: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 23:32:44,806: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 23:32:44,818: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-05 23:32:55,334: ERROR: stage_02_search_answer: Expecting value: line 1 column 1 (char 0)]
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\requests\models.py", line 971, in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 39, in <module>
+    obj.chainlit_prompt("what are skills", prompt, "650ac970-f431-45fb-8a42-f9c53207a7c2", "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","slot-1", "google/gemma-2b-it")
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 28, in chainlit_prompt
+    output_text = self.query_answer.ask(query, query_results, prompt, hf_key, model)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 147, in ask
+    answer = self.ask_cpu(query, prompt_set["temperature"], base_prompt, hf_key, model)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 133, in ask_cpu
+    print(response.json())
+          ^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\requests\models.py", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[2024-06-05 23:38:28,067: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-05 23:38:28,067: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-05 23:38:28,083: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-05 23:38:28,086: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-05 23:38:28,090: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]

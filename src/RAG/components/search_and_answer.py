@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 import torch
 import pandas as pd
@@ -8,18 +9,18 @@ from pinecone import Pinecone
 
 from RAG.entity.config_entity import SearchConfig
 from RAG.utils.common import setup_env
+from RAG.utils.prompts import PROMPTS
 
 class SearchAndAnswer:
-    def __init__(self, config: SearchConfig) -> None:
+    def __init__(self, config: SearchConfig, pc_key) -> None:
         self.config = config
-        self.pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
-        self.index = self.pc.Index(self.config.index_name)
+        self.pc = Pinecone(api_key=pc_key)
         self.embedding_model = SentenceTransformer(
             model_name_or_path=self.config.embed_model_name, 
             device=self.config.device_name
         )
-        self.df = pd.read_csv(self.config.data_file)
-        self.df.set_index("index",inplace=True)
+        self.dfs = {"slot-1": "", "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""}
+        self.paths ={"slot-1": "", "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""}
         if self.config.device_name == "cuda":
             self.tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path=self.config.model_id)
             self.llm_model = AutoModelForCausalLM.from_pretrained(pretrained_model_name_or_path=self.config.model_id, 
@@ -30,21 +31,29 @@ class SearchAndAnswer:
             self.llm_model.to("cuda")
         else:
             pass
-
-
-    def retrive_similar_enbeddings(self, query: str):
+    def setup_pd(self, paths):
+        for slot in paths:
+            path = paths[slot]
+            if path != "":
+                self.dfs[slot] = pd.read_csv(f"{path}.csv")
+                self.dfs[slot].set_index("index",inplace=True)
+        self.paths = paths
+    def retrive_similar_enbeddings(self, query: str, index = None):
+        if not index:
+            index = self.config.index_name
+        index = self.pc.Index(self.config.index_name)
         embeddings = self.embedding_model.encode(query)
-        query_results = self.index.query(
+        query_results = index.query(
             vector=embeddings.tolist(),
             top_k=self.config.top_k,
             include_values=True
         )
         return query_results
     
-    def fetch_chunks(self, query_results):
+    def fetch_chunks(self, query_results, index):
         query_results = query_results["matches"]
         for item in query_results:
-            item["sentence_chunk"] = self.df.loc[item["id"]]["sentence_chunk"]
+            item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
         return query_results
 
 
@@ -61,14 +70,12 @@ class SearchAndAnswer:
         return base_prompt
     
     def ask_gpu(self,
-            query,
-            context_items,
-            prompt_template,
+            base_prompt,
+            temperature,
             max_new_tokens=512,
             format_answer_text=True, 
             return_answer_only=True,):
         
-        base_prompt = self.prompt_formatter(query, context_items, prompt_template)
         # Create prompt template for instruction-tuned model
         dialogue_template = [
             {"role": "user",
@@ -83,7 +90,7 @@ class SearchAndAnswer:
 
         # Generate an output of tokens
         outputs = self.llm_model.generate(**input_ids,
-                                    temperature=prompt_template["temperature"],
+                                    temperature=temperature,
                                     do_sample=True,
                                     max_new_tokens=max_new_tokens)
         
@@ -101,20 +108,21 @@ class SearchAndAnswer:
         return 
     
     def ask_cpu(self,
-            query,
-            context_items,
-            prompt_template,
-            max_new_tokens=512):
-        prompt = self.prompt_formatter(query, context_items, prompt_template["prompt"])
-        print(prompt)
-        API_URL = f"https://api-inference.huggingface.co/models/{self.config.model_id}"
-        API_TOKEN = os.environ["HUGGINGFACE_HUB_TOKEN"]
+                base_prompt,
+                temperature,
+                hf_key,
+                model,
+                max_new_tokens=512):
+        API_URL = f"https://api-inference.huggingface.co/models/{model}"
+        API_TOKEN = hf_key
         payload = {
-            "inputs": prompt,
+            "inputs": base_prompt,
             "parameters": {
-                "temperature": prompt_template["temperature"],
-                "max_new_tokens": max_new_tokens,
-                "return_full_text": False
+                "temperature": temperature,
+                "return_full_text": False,
+            },
+            "options":{
+                "wait_for_model": True
             }
         }
         headers = {"Authorization": f"Bearer {API_TOKEN}"}
@@ -127,9 +135,32 @@ class SearchAndAnswer:
             return None
 
 
-    def ask(self, query, context_items, prompt_template):
+    def ask(self, query, context_items, prompt_type, hf_key, model):
+        prompt_set = PROMPTS[prompt_type]
+        context = "- " + "\n- ".join(["Index("+item["id"]+")-"+item["sentence_chunk"] for item in context_items])
+        
+        # Update base prompt with context items and query   
+        base_prompt = prompt_set["prompt"].format(context=context, query=query)
+        base_prompt = self.clean_prompt(base_prompt)
         if self.config.device_name == "cuda":
-            answer = self.ask_gpu(query, context_items, prompt_template)
+            answer = self.ask_gpu(base_prompt, prompt_set["temperature"])
         else:
-            answer = self.ask_cpu(query, context_items, prompt_template)
+            answer = self.ask_cpu(base_prompt, prompt_set["temperature"], hf_key, model)
         return answer
+    
+
+    def clean_prompt(self, prompt):
+        # Remove leading and trailing spaces
+        # prompt = prompt.strip()
+        
+        # Replace multiple spaces with a single space
+        prompt = re.sub(r'\s+', ' ', prompt)
+        
+        # Remove all special characters except letters, digits, and basic punctuation
+        # Allowed characters: a-z, A-Z, 0-9, space, and basic punctuation (.,!?')
+        allowed_characters = re.compile(r'[^a-zA-Z0-9\s.,!?\'"-]')
+        
+        # Remove characters that are not in the allowed set
+        cleaned_prompt = allowed_characters.sub('', prompt)
+        
+        return cleaned_prompt

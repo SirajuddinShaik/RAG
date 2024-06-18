@@ -11,17 +11,15 @@ from pinecone import Pinecone, ServerlessSpec
 
 from RAG.entity.config_entity import DataIngestionConfig
 from RAG import logger
-from RAG.utils.common import setup_env
 
 class DataIngestion:
-    def __init__(self, config: DataIngestionConfig):
+    def __init__(self, config: DataIngestionConfig, api_key):
         self.config = config
-        setup_env()
         self.embedding_model = SentenceTransformer(
             model_name_or_path=self.config.model_name, 
             device=self.config.device_name
         )
-        self.pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
+        self.pc = Pinecone(api_key)
 
 
     def download_data(self):
@@ -44,8 +42,10 @@ class DataIngestion:
         return cleaned_text
     
 
-    def open_and_read_pdf(self) -> list:
-        docs = fitz.open(self.config.local_data_file)
+    def open_and_read_pdf(self, file_path) -> list:
+        if not file_path:
+            file_path = self.config.local_data_file
+        docs = fitz.open(file_path)
         pages_and_text = []
         for page_no, page in tqdm(enumerate(docs)):
             text = page.get_text()
@@ -79,10 +79,12 @@ class DataIngestion:
     
 
     def chuck_data(self,input_list: list[str]) -> list[list[str]]:
-        return([input_list[i:i+self.config.chunk_size] for i in range(0, len(input_list), self.config.chunk_size)])
+        return([input_list[i:i+self.config.chunk_size] for i in range(0, len(input_list), self.config.chunk_size - 3)])
     
 
-    def split_chunks(self, pages_and_text:list) -> list:
+    def split_chunks(self, pages_and_text:list, path = None) -> list:
+        if not path:
+            path = self.config.root_dir+"/data"
         pages_and_chunks = []
         for item in tqdm(pages_and_text):
             page_no = item["page_number"]
@@ -97,6 +99,7 @@ class DataIngestion:
                 chunk_dict["chunk_token_count"] = len(joined_chunk) // 4
 
                 pages_and_chunks.append(chunk_dict)
+                pd.DataFrame(pages_and_chunks).drop(columns=["chunk_token_count", "chunk_word_count", "chunk_char_count"]).to_csv(f"{path}.csv")
         return pages_and_chunks
     
 
@@ -105,8 +108,6 @@ class DataIngestion:
         logger.info(">>>>>>>> Embedding Started <<<<<<<<<")
         df = pd.DataFrame(pages_and_chunks)
         pages_and_chunks_over_min_token_len = df[df["chunk_token_count"] > self.config.min_token_length]
-        pages_and_chunks_over_min_token_len.set_index('index', inplace=True)
-        pages_and_chunks_over_min_token_len.to_csv(f"{self.config.root_dir}/data.csv")
         text_chunks = [item["sentence_chunk"] for item in pages_and_chunks_over_min_token_len.to_dict(orient="records")]
         text_chunks_embeddings = self.embedding_model.encode(
             text_chunks,
@@ -114,18 +115,19 @@ class DataIngestion:
             convert_to_tensor=True,
         )
         logger.info(">>>>>>>> Embedding Completed <<<<<<<<<")
-        for i, data in enumerate(pages_and_chunks_over_min_token_len):
-            data["embeddings"] = text_chunks_embeddings[i]
-
-        return pages_and_chunks_over_min_token_len
+        # for i, data in enumerate(pages_and_chunks_over_min_token_len):
+        pages_and_chunks_over_min_token_len["embeddings"] = [i for i in text_chunks_embeddings]
+        return pages_and_chunks_over_min_token_len.to_dict(orient="records")
     
 
-    def to_vector_database(self,pages_and_chunks_over_min_token_len):
-        if self.config.index_name in self.pc.list_indexes().names():
-            logger.warning(f"Index Already Exist! Deleting Index:{self.config.index_name}")
-            self.pc.delete_index(self.config.index_name)
+    def to_vector_database(self,pages_and_chunks_over_min_token_len,index_name = None):
+        if not index_name:
+            index_name = self.config.index_name
+        if index_name in self.pc.list_indexes().names():
+            logger.warning(f"Index Already Exist! Deleting Index:{index_name}")
+            self.pc.delete_index(index_name)
         self.pc.create_index(
-            name=self.config.index_name,
+            name=index_name,
             dimension=pages_and_chunks_over_min_token_len[0]["embeddings"].shape[0],
             metric="cosine",
             spec=ServerlessSpec(
@@ -134,7 +136,7 @@ class DataIngestion:
             ) 
         )
         logger.info("Data is Going To Load to Pinecone!")
-        index = self.pc.Index(self.config.index_name)
+        index = self.pc.Index(index_name)
         vectors = [{"id": item["index"],"values": item["embeddings"]} for item in pages_and_chunks_over_min_token_len]
         vectors = [vectors[i:i+32] for i in range(0, len(vectors), 32)]
         for batch in tqdm(vectors): 
