@@ -38,7 +38,7 @@ query_type = Select(
 pdf_select = Select(
     id="Pdf",
     label="Select Pdf - Slot",
-    values=["slot-1", "slot-2", "slot-3", "slot-4", "slot-5"],
+    values=["chat", "slot-1", "slot-2", "slot-3", "slot-4"],
     initial_index=0,
 )
 hf_api = TextInput(
@@ -68,9 +68,9 @@ async def start():
     cl.user_session.set("model", "")
     cl.user_session.set("task", "")
     cl.user_session.set(
-        "paths", {"slot-1": "", "slot-2": "", "slot-3": "", "slot-4": "", "slot-5": ""}
+        "paths", {"chat": "", "slot-1": "", "slot-2": "", "slot-3": "", "slot-4": ""}
     )
-    cl.user_session.set("slot", "slot-1")
+    cl.user_session.set("slot", "chat")
     cl.user_session.set("err", "Setup Api Keys")
     cl.user_session.set("api_status", False)
     msg = cl.Message(content=f"Setup Your Api keys and Start")
@@ -143,7 +143,7 @@ async def load_pdf_to_pinecone():
         files = await cl.AskFileMessage(
             content=f"Please upload a PDF file to load in {index_name}, `Please Wait!`",
             accept=["application/pdf"],
-            max_size_mb=20,
+            max_size_mb=250,
             timeout=180,
         ).send()
 
@@ -174,7 +174,7 @@ async def load_pdf():
         files = await cl.AskFileMessage(
             content=f"Please upload a PDF file to load in {index_name}, `Please Wait!`",
             accept=["application/pdf"],
-            max_size_mb=20,
+            max_size_mb=250,
             timeout=180,
         ).send()
 

@@ -42,7 +42,7 @@ class DataIngestion:
         return cleaned_text
     
 
-    def open_and_read_pdf(self, file_path) -> list:
+    def open_and_read_pdf(self, file_path = None) -> list:
         if not file_path:
             file_path = self.config.local_data_file
         docs = fitz.open(file_path)

@@ -16,5 +16,5 @@ search_and_retrive:
     device_name: cpu
     embed_model_name: all-mpnet-base-v2
     data_file: artifacts/data_ingestion/data.csv
-    model_id: google/gemma-2b-it
+    model_id: meta-llama/Meta-Llama-3-8B-Instruct
   

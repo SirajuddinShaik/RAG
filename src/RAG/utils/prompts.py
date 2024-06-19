@@ -1,4 +1,4 @@
-PROMPTS = { 
+PROMPTS = {
     "detailed_prompt": {
         "temperature": 0.3,
         "prompt": """Based on the following context items, please provide a detailed and explanatory answer to the query.
@@ -11,9 +11,8 @@ PROMPTS = {
             {context}
             \nRelevant passages: <extract relevant passages from the context here and display the index which is more relevant>
             User query: {query}
-            Answer:"""
+            Answer:""",
     },
-                    
     "short_prompt": {
         "temperature": 0.5,
         "prompt": """Based on the following context items, please provide a concise answer to the query.
@@ -29,9 +28,8 @@ PROMPTS = {
             {context}
             \nRelevant passages: <extract relevant passages from the context here and display the index which is more relevant>
             User query: {query}
-            Answer:"""
+            Answer:""",
     },
-                    
     "summary_prompt": {
         "temperature": 0.4,
         "prompt": """Based on the following context items, please summarize the content.
@@ -47,9 +45,8 @@ PROMPTS = {
             {context}
             \nRelevant passages: <extract relevant passages from the context here and display the index which is more relevant>
             User query: {query}
-            Answer:"""
+            Answer:""",
     },
-                    
     "explanation_prompt": {
         "temperature": 0.4,
         "prompt": """Based on the following context items, please provide an explanatory answer to the query.
@@ -65,9 +62,8 @@ PROMPTS = {
             {context}
             \nRelevant passages: <extract relevant passages from the context here and display the index which is more relevant>
             User query: {query}
-            Answer:"""
+            Answer:""",
     },
-                    
     "opinion_prompt": {
         "temperature": 0.7,
         "prompt": """Based on the following context items, please provide an opinionated or analytical answer to the query.
@@ -83,9 +79,8 @@ PROMPTS = {
             {context}
             \nRelevant passages: <extract relevant passages from the context here and display the index which is more relevant>
             User query: {query}
-            Answer:"""
+            Answer:""",
     },
-                    
     "instruction_prompt": {
         "temperature": 0.3,
         "prompt": """Based on the following context items, please provide step-by-step instructions or a guide to the query.
@@ -101,8 +96,168 @@ PROMPTS = {
             {context}
             \nRelevant passages: <extract relevant passages from the context here and display the index which is more relevant>
             User query: {query}
-            Answer:"""
-    }
-
+            Answer:""",
+    },
 }
-                   
+
+PROMPTS2 = {
+    "detailed_prompt": {
+        "temperature": 0.3,
+        "prompt": """Based on the following context items, provide a detailed and explanatory answer to the query. 
+    Use the context to extract relevant information and combine it with your knowledge to formulate a thorough response.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "short_prompt": {
+        "temperature": 0.5,
+        "prompt": """Based on the following context items, provide a concise answer to the query. 
+    Extract relevant information from the context and combine it with your knowledge to give a brief and accurate response.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "summary_prompt": {
+        "temperature": 0.4,
+        "prompt": """Based on the following context items, summarize the content. 
+    Extract key points from the context and combine them with your knowledge to provide a clear and concise summary.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "explanation_prompt": {
+        "temperature": 0.4,
+        "prompt": """Based on the following context items, provide an explanatory answer to the query. 
+    Use the context to extract relevant details and combine them with your knowledge to offer a comprehensive explanation.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "opinion_prompt": {
+        "temperature": 0.7,
+        "prompt": """Based on the following context items, provide an opinionated or analytical answer to the query. 
+    Use the context to extract relevant information and combine it with your insights to form a thoughtful and analytical response.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "instruction_prompt": {
+        "temperature": 0.3,
+        "prompt": """Based on the following context items, provide step-by-step instructions or a guide to the query. 
+    Use the context to extract relevant information and combine it with your knowledge to create a clear, structured, and easy-to-follow response.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+}
+
+PROMPTS3 = {
+    "detailed_prompt": {
+        "temperature": 0.3,
+        "prompt": """Based on the following context items, provide a detailed and explanatory answer to the query.
+    If the context does not contain the answer, use your knowledge to formulate a thorough response.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "short_prompt": {
+        "temperature": 0.5,
+        "prompt": """Based on the following context items, provide a concise answer to the query.
+    If the context does not contain the answer, use your knowledge to provide a brief and accurate response.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "summary_prompt": {
+        "temperature": 0.4,
+        "prompt": """Based on the following context items, summarize the content.
+    If the context does not contain sufficient information, use your knowledge to provide a clear and concise summary.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "explanation_prompt": {
+        "temperature": 0.4,
+        "prompt": """Based on the following context items, provide an explanatory answer to the query.
+    If the context does not contain the answer, use your knowledge to offer a comprehensive explanation.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "opinion_prompt": {
+        "temperature": 0.7,
+        "prompt": """Based on the following context items, provide an opinionated or analytical answer to the query.
+    If the context does not contain sufficient information, use your insights and knowledge to form a thoughtful response.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+    "instruction_prompt": {
+        "temperature": 0.3,
+        "prompt": """Based on the following context items, provide step-by-step instructions or a guide to the query.
+    If the context does not contain the answer, use your knowledge to create a clear, structured, and easy-to-follow response.
+    
+    Context:
+    {context}
+    
+    Relevant Passages: Extract relevant passages from the context here and display the index which is more relevant
+    
+    Query: {query}
+    Answer:""",
+    },
+}

@@ -1514,3 +1514,174 @@ requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 [2024-06-05 23:38:28,083: INFO: common: yaml file: params.yaml loaded successfully]
 [2024-06-05 23:38:28,086: INFO: common: yaml file: schema.yaml loaded successfully]
 [2024-06-05 23:38:28,090: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 09:55:11,310: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 09:55:11,323: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 09:55:11,334: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 09:55:11,338: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 09:55:11,340: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 10:04:42,229: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 10:04:42,235: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 10:04:42,241: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 10:04:42,244: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 10:04:42,247: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 10:04:59,474: ERROR: stage_02_search_answer: name 'PROMPTS3' is not defined]
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 49, in <module>
+    obj.chainlit_prompt(
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 29, in chainlit_prompt
+    output_text = self.query_answer.ask(query, query_results, prompt, hf_key, model)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 162, in ask
+    prompt_set = PROMPTS3[prompt_type]
+                 ^^^^^^^^
+NameError: name 'PROMPTS3' is not defined
+[2024-06-19 10:05:32,188: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 10:05:32,193: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 10:05:32,197: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 10:05:32,198: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 10:05:32,201: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 10:06:30,260: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 10:06:30,264: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 10:06:30,265: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 10:06:30,266: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 10:06:30,267: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 10:09:32,172: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 10:09:32,176: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 10:09:32,177: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 10:09:32,178: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 10:09:32,179: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 10:11:33,386: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 10:11:33,389: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 10:11:33,390: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 10:11:33,391: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 10:11:33,392: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 11:10:02,251: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 11:10:02,268: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 11:10:02,271: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 11:10:02,273: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 11:10:02,275: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 11:51:34,476: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 11:51:34,480: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 11:51:34,482: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 11:51:34,483: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 11:51:34,484: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 11:52:33,388: ERROR: stage_02_search_answer: 'rag-index']
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 49, in <module>
+    obj.chainlit_prompt(
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 28, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 73, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ~~~~~~~~^^^^^^^
+KeyError: 'rag-index'
+[2024-06-19 11:53:15,696: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 11:53:15,701: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 11:53:15,702: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 11:53:15,703: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 11:53:15,704: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 11:54:38,368: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 11:54:38,372: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 11:54:38,374: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 11:54:38,376: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 11:54:38,378: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 11:58:41,821: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 11:58:41,826: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 11:58:41,828: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 11:58:41,830: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 11:58:41,831: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 11:59:11,230: ERROR: stage_02_search_answer: '860_2']
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexes\base.py", line 3653, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas\_libs\index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: '860_2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 49, in <module>
+    obj.chainlit_prompt(
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 28, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 73, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1103, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1343, in _getitem_axis
+    return self._get_label(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1293, in _get_label
+    return self.obj.xs(label, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\generic.py", line 4095, in xs
+    loc = index.get_loc(key)
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexes\base.py", line 3655, in get_loc
+    raise KeyError(key) from err
+KeyError: '860_2'
+[2024-06-19 12:01:28,405: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 12:01:28,412: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 12:01:28,415: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 12:01:28,418: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 12:01:28,420: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 12:01:47,941: ERROR: stage_02_search_answer: '863_2']
+Traceback (most recent call last):
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexes\base.py", line 3653, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas\_libs\index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: '863_2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 49, in <module>
+    obj.chainlit_prompt(
+  File "c:\Users\shaik\Documents\Programing\ML\RAG\src\RAG\pipeline\stage_02_search_answer.py", line 28, in chainlit_prompt
+    query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\users\shaik\documents\programing\ml\rag\src\RAG\components\search_and_answer.py", line 73, in fetch_chunks
+    item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
+                             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1103, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1343, in _getitem_axis
+    return self._get_label(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexing.py", line 1293, in _get_label
+    return self.obj.xs(label, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\generic.py", line 4095, in xs
+    loc = index.get_loc(key)
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\shaik\Documents\Programing\TFOD\tfod\Lib\site-packages\pandas\core\indexes\base.py", line 3655, in get_loc
+    raise KeyError(key) from err
+KeyError: '863_2'
+[2024-06-19 12:05:44,102: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 12:05:44,109: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 12:05:44,111: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 12:05:44,112: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 12:05:44,114: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 12:09:14,029: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 12:09:14,033: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 12:09:14,035: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 12:09:14,037: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 12:09:14,039: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-19 12:11:36,432: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-06-19 12:11:36,436: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2024-06-19 12:11:36,438: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-19 12:11:36,440: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-19 12:11:36,443: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
