@@ -21,16 +21,21 @@ class SearchAnswerPipeline:
         return output_text
 
     def chainlit_prompt(self, query: str, prompt: str, pc_key, hf_key, index, model):
-        if index != "chat":
-            query_embeddings = self.query_answer.retrive_similar_enbeddings(
-                query, pc_key
+        try:
+            if index != "chat":
+                query_embeddings = self.query_answer.retrive_similar_enbeddings(
+                    query, pc_key
+                )
+                query_results = self.query_answer.fetch_chunks(query_embeddings, index)
+            else:
+                query_results = []
+            output_text = self.query_answer.ask(
+                query, query_results, prompt, hf_key, model, index
             )
-            query_results = self.query_answer.fetch_chunks(query_embeddings, index)
-        else:
-            query_results = []
-        output_text = self.query_answer.ask(query, query_results, prompt, hf_key, model)
-        print(output_text)
-        return output_text
+            print(output_text)
+            return output_text
+        except Exception as e:
+            raise e
 
 
 if __name__ == "__main__":

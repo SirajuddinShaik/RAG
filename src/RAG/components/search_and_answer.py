@@ -9,7 +9,7 @@ from pinecone import Pinecone
 
 from RAG.entity.config_entity import SearchConfig
 from RAG.utils.common import setup_env
-from RAG.utils.prompts import PROMPTS, PROMPTS2, PROMPTS3
+from RAG.utils.prompts import PROMPTS, PROMPTS2, PROMPTS3, LLAMA
 
 
 class SearchAndAnswer:
@@ -33,6 +33,9 @@ class SearchAndAnswer:
             "slot-4": "",
         }
         if self.config.device_name == "cuda":
+            self.chat = [
+                LLAMA["system"].format(system_msg="You are a helpful AI assistant"),
+            ]
             self.tokenizer = AutoTokenizer.from_pretrained(
                 pretrained_model_name_or_path=self.config.model_id
             )
@@ -185,19 +188,32 @@ class SearchAndAnswer:
             print(response.json())
             return None
 
-    def ask(self, query, context_items, prompt_type, hf_key, model):
-        prompt_set = PROMPTS3[prompt_type]
-        context = "- " + "\n- ".join(
-            [
-                "Index[" + item["id"] + "]-" + item["sentence_chunk"]
-                for item in context_items
-            ]
-        )
+    def ask(self, query, context_items, prompt_type, hf_key, model, index):
+        if index == "chat":
+            if prompt_type == "system":
+                self.chat = []
+            prompt = LLAMA[prompt_type].format(msg=query)
+            self.chat.append(prompt)
+            prompt_set = {"prompt": "\n".join(self.chat), "temperature": 1}
+        else:
+            prompt_set = PROMPTS3[prompt_type]
+            context = "- " + "\n- ".join(
+                [
+                    "Index[" + item["id"] + "]-" + item["sentence_chunk"]
+                    for item in context_items
+                ]
+            )
 
-        # Update base prompt with context items and query
-        base_prompt = prompt_set["prompt"].format(context=context, query=query)
-        base_prompt = self.clean_prompt(base_prompt)
-        if self.config.device_name == "cuda":
+            # Update base prompt with context items and query
+            base_prompt = prompt_set["prompt"].format(context=context, query=query)
+            base_prompt = self.clean_prompt(base_prompt)
+            if model == "Llama-3(gpu)":
+                base_prompt = (
+                    LLAMA["system"].format(msg="You are a helpful AI assistant")
+                    + "\n"
+                    + LLAMA["user"].format(msg=base_prompt)
+                )
+        if self.config.device_name == "cuda" and model == "Llama-3(gpu)":
             answer = self.ask_gpu(base_prompt, prompt_set["temperature"])
         else:
             answer = self.ask_cpu(base_prompt, prompt_set["temperature"], hf_key, model)

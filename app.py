@@ -15,6 +15,7 @@ model_select = Select(
     label="select - Model",
     values=[
         "openai-community/gpt2",
+        "Llama-3(gpu)",
         "google/gemma-2b-it",
         "openai-community/gpt2-xl",
         "microsoft/Phi-3-vision-128k-instruct",
