@@ -26,6 +26,7 @@ query_type = Select(
     id="Query",
     label="Select Task - Type",
     values=[
+        "chat",
         "detailed_prompt",
         "short_prompt",
         "summary_prompt",
