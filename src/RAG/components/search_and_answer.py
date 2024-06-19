@@ -127,7 +127,7 @@ class SearchAndAnswer:
         base_prompt,
         temperature,
         max_new_tokens=512,
-        format_answer_text=True,
+        format_answer_text=False,
         return_answer_only=True,
     ):
 
@@ -152,7 +152,7 @@ class SearchAndAnswer:
 
         # Turn the output tokens into text
         output_text = self.tokenizer.decode(outputs[0])
-
+        self.chat.append(output_text)
         if format_answer_text:
             # Replace special tokens and unnecessary help message
             output_text = (
