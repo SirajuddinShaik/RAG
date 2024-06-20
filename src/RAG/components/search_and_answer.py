@@ -13,7 +13,7 @@ from RAG.utils.prompts import PROMPTS, PROMPTS2, PROMPTS3, LLAMA
 
 
 class SearchAndAnswer:
-    def __init__(self, config: SearchConfig, pc_key) -> None:
+    def __init__(self, config: SearchConfig, pc_key, llm_model = None) -> None:
         self.config = config
         self.pc = Pinecone(api_key=pc_key)
         self.embedding_model = SentenceTransformer(
@@ -39,43 +39,7 @@ class SearchAndAnswer:
             self.tokenizer = AutoTokenizer.from_pretrained(
                 pretrained_model_name_or_path=self.config.model_id
             )
-            import torch
-            from transformers import AutoTokenizer, AutoModelForCausalLM
-            from transformers.utils import is_flash_attn_2_available
-
-            # 1. Create quantization config for smaller model loading (optional)
-            # Requires !pip install bitsandbytes accelerate, see: https://github.com/TimDettmers/bitsandbytes, https://huggingface.co/docs/accelerate/
-            # For models that require 4-bit quantization (use this if you have low GPU memory available)
-            from transformers import BitsAndBytesConfig
-
-            quantization_config = BitsAndBytesConfig(
-                load_in_8bit=True, bnb_4bit_compute_dtype=torch.float16
-            )
-
-            if (is_flash_attn_2_available()) and (
-                torch.cuda.get_device_capability(0)[0] >= 8
-            ):
-                attn_implementation = "flash_attention_2"
-            else:
-                attn_implementation = "sdpa"
-            print(f"[INFO] Using attention implementation: {attn_implementation}")
-
-            model_id = "meta-llama/Meta-Llama-3-8B"  # (we already set this above)
-            print(f"[INFO] Using model_id: {model_id}")
-
-            # 3. Instantiate tokenizer (tokenizer turns text into numbers ready for the model)
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                pretrained_model_name_or_path=self.config.model_id
-            )
-
-            # 4. Instantiate the model
-            self.llm_model = AutoModelForCausalLM.from_pretrained(
-                pretrained_model_name_or_path=self.config.model_id,
-                torch_dtype=torch.float16,  # datatype to use, we want float16
-                quantization_config=quantization_config,
-                low_cpu_mem_usage=True,  # use full memory
-                attn_implementation=attn_implementation,
-            )
+            self.llm_model = llm_model
         else:
             pass
 

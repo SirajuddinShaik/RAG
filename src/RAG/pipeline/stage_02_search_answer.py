@@ -8,11 +8,11 @@ STAGE_NAME = "Search Answer stage"
 
 
 class SearchAnswerPipeline:
-    def __init__(self, pc_key) -> None:
+    def __init__(self, pc_key, llm_model=None) -> None:
         setup_env()
         config = ConfigurationManager()
         self.search_config = config.get_search_config()
-        self.query_answer = SearchAndAnswer(self.search_config, pc_key)
+        self.query_answer = SearchAndAnswer(self.search_config, pc_key, llm_model)
 
     def main(self, query: str, prompt: str):
         query_embeddings = self.query_answer.retrive_similar_enbeddings(query)

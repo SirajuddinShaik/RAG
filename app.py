@@ -9,6 +9,43 @@ from tqdm.auto import tqdm
 from RAG.pipeline.stage_01_data_ingestion import DataIngestionPipeLine
 from RAG.pipeline.stage_02_search_answer import SearchAnswerPipeline
 
+llm_model = None
+import torch
+
+if torch.cuda.is_available():
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+    from transformers.utils import is_flash_attn_2_available
+
+    # 1. Create quantization config for smaller model loading (optional)
+    # Requires !pip install bitsandbytes accelerate, see: https://github.com/TimDettmers/bitsandbytes, https://huggingface.co/docs/accelerate/
+    # For models that require 4-bit quantization (use this if you have low GPU memory available)
+    from transformers import BitsAndBytesConfig
+
+    quantization_config = BitsAndBytesConfig(
+        load_in_4bit=True, bnb_4bit_compute_dtype=torch.float16
+    )
+
+    if (is_flash_attn_2_available()) and (torch.cuda.get_device_capability(0)[0] >= 8):
+        attn_implementation = "flash_attention_2"
+    else:
+        attn_implementation = "sdpa"
+    print(f"[INFO] Using attention implementation: {attn_implementation}")
+
+    model_id = "meta-llama/Meta-Llama-3-8B-Instruct"  # (we already set this above)
+    print(f"[INFO] Using model_id: {model_id}")
+
+    # 3. Instantiate tokenizer (tokenizer turns text into numbers ready for the model)
+    tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path=model_id)
+
+    # 4. Instantiate the model
+    llm_model = AutoModelForCausalLM.from_pretrained(
+        pretrained_model_name_or_path=model_id,
+        torch_dtype=torch.float16,  # datatype to use, we want float16
+        quantization_config=quantization_config,
+        low_cpu_mem_usage=True,  # use full memory
+        attn_implementation=attn_implementation,
+    )  # which attention version to use
+
 
 model_select = Select(
     id="Model",
@@ -198,7 +235,9 @@ async def verify_keys(settings):
         pc = Pinecone(settings["pc_key"])
         try:
             print(pc.list_indexes().names())
-            cl.user_session.set("searcher", SearchAnswerPipeline(settings["pc_key"]))
+            cl.user_session.set(
+                "searcher", SearchAnswerPipeline(settings["pc_key"], llm_model)
+            )
             cl.user_session.set("pc", settings["pc_key"])
         except:
             message = "Invalid Pinecone Key"
