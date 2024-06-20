@@ -21,10 +21,10 @@ class SearchAndAnswer:
             device=self.config.device_name,
         )
         self.dfs = {
-            "slot-1": "",
-            "slot-2": "",
-            "slot-3": "",
-            "slot-4": "",
+            "slot-1": pd.DataFrame(),
+            "slot-2": pd.DataFrame(),
+            "slot-3": pd.DataFrame(),
+            "slot-4": pd.DataFrame(),
         }
         self.paths = {
             "slot-1": "",
@@ -33,9 +33,9 @@ class SearchAndAnswer:
             "slot-4": "",
         }
         if self.config.device_name == "cuda":
-            self.chat = [
-                LLAMA["system"].format(system_msg="You are a helpful AI assistant"),
-            ]
+            self.chat = LLAMA["system"].format(
+                system_msg="You are a helpful AI assistant"
+            )
             self.tokenizer = AutoTokenizer.from_pretrained(
                 pretrained_model_name_or_path=self.config.model_id
             )
@@ -90,18 +90,23 @@ class SearchAndAnswer:
     def retrive_similar_enbeddings(self, query: str, index=None):
         if not index:
             index = self.config.index_name
-        index = self.pc.Index(self.config.index_name)
+        index = self.pc.Index(index)
         embeddings = self.embedding_model.encode(query)
         query_results = index.query(
             vector=embeddings.tolist(), top_k=self.config.top_k, include_values=True
         )
+        print(query_results)
         return query_results
 
     def fetch_chunks(self, query_results, index):
         query_results = query_results["matches"]
-        for item in query_results:
-            item["sentence_chunk"] = self.dfs[index].loc[item["id"]]["sentence_chunk"]
-        return query_results
+        print(index)
+        if self.paths[index] != "":
+            for item in query_results:
+                item["sentence_chunk"] = self.dfs[index].loc[item["id"]][
+                    "sentence_chunk"
+                ]
+            return query_results
 
     def prompt_formatter(
         self, query: str, context_items: list[dict], base_prompt: str
@@ -132,13 +137,13 @@ class SearchAndAnswer:
     ):
 
         # Create prompt template for instruction-tuned model
-        dialogue_template = [{"role": "user", "content": base_prompt}]
-        # Apply the chat template
-        prompt = self.tokenizer.apply_chat_template(
-            conversation=dialogue_template, tokenize=False, add_generation_prompt=True
-        )
+        # dialogue_template = [{"role": "user", "content": base_prompt}]
+        # # Apply the chat template
+        # prompt = self.tokenizer.apply_chat_template(
+        #     conversation=dialogue_template, tokenize=False, add_generation_prompt=True
+        # )
         # Tokenize the prompt
-        input_ids = self.tokenizer(prompt, return_tensors="pt").to(
+        input_ids = self.tokenizer(base_prompt, return_tensors="pt").to(
             self.config.device_name
         )
 
@@ -156,7 +161,7 @@ class SearchAndAnswer:
         if format_answer_text:
             # Replace special tokens and unnecessary help message
             output_text = (
-                output_text.replace(prompt, "")
+                output_text.replace(base_prompt, "")
                 .replace("<bos>", "")
                 .replace("<eos>", "")
                 .replace("Sure, here is the answer to the user query:\n\n", "")
@@ -189,13 +194,23 @@ class SearchAndAnswer:
             return None
 
     def ask(self, query, context_items, prompt_type, hf_key, model, index):
-        if index == "chat":
+        if (
+            index == "chat"
+            and self.config.device_name == "cuda"
+            and model == "Llama-3(gpu)"
+        ):
             if prompt_type == "system":
-                self.chat = []
+                self.chat = ""
+            if prompt_type not in ["chat", "system"]:
+                return "currently chat or system is suported for llama 3 gpu"
             prompt = LLAMA[prompt_type].format(msg=query)
-            self.chat.append(prompt)
-            prompt_set = {"prompt": "\n".join(self.chat), "temperature": 1}
-        else:
+            self.chat += prompt
+            prompt_set = {"prompt": self.chat, "temperature": 1}
+            answer = self.ask_gpu(base_prompt, prompt_set["temperature"])
+            return answer
+        elif prompt_type != "system" and model != "Llama-3(gpu)":
+            if prompt_type == "system":
+                return "system message cant be modified!"
             prompt_set = PROMPTS3[prompt_type]
             context = "- " + "\n- ".join(
                 [
@@ -207,16 +222,20 @@ class SearchAndAnswer:
             # Update base prompt with context items and query
             base_prompt = prompt_set["prompt"].format(context=context, query=query)
             base_prompt = self.clean_prompt(base_prompt)
-            if model == "Llama-3(gpu)":
+            if model == "Llama-3(gpu)" and self.config.device_name == "cuda":
                 base_prompt = (
                     LLAMA["system"].format(msg="You are a helpful AI assistant")
-                    + "\n"
+                    + "\n\n"
                     + LLAMA["user"].format(msg=base_prompt)
                 )
         if self.config.device_name == "cuda" and model == "Llama-3(gpu)":
             answer = self.ask_gpu(base_prompt, prompt_set["temperature"])
-        else:
+        elif model != "Llama-3(gpu)":
             answer = self.ask_cpu(base_prompt, prompt_set["temperature"], hf_key, model)
+        else:
+            answer = self.err_msg(
+                "Your Instruction setting is Wrong! eg: selecting gpu model without gpu"
+            )
         return answer
 
     def clean_prompt(self, prompt):
@@ -234,3 +253,6 @@ class SearchAndAnswer:
         cleaned_prompt = allowed_characters.sub("", prompt)
         print(cleaned_prompt)
         return cleaned_prompt
+
+    def err_msg(self, msg):
+        return [{"generated_text": msg}]

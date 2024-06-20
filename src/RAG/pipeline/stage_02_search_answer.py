@@ -24,7 +24,7 @@ class SearchAnswerPipeline:
         try:
             if index != "chat":
                 query_embeddings = self.query_answer.retrive_similar_enbeddings(
-                    query, pc_key
+                    query, index
                 )
                 query_results = self.query_answer.fetch_chunks(query_embeddings, index)
             else:
@@ -35,7 +35,10 @@ class SearchAnswerPipeline:
             print(output_text)
             return output_text
         except Exception as e:
-            raise e
+            print(e)
+            return [
+                {"generated_text": "data or pdf not loaded in the slot or " + str(e)}
+            ]
 
 
 if __name__ == "__main__":
