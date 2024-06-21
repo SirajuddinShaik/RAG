@@ -51,6 +51,8 @@ class SearchAndAnswer:
     def retrive_similar_enbeddings(self, query: str, index=None):
         if not index:
             index = self.config.index_name
+        if index == "nutrition":
+            index = "slot-4"
         index = self.pc.Index(index)
         embeddings = self.embedding_model.encode(query)
         query_results = index.query(

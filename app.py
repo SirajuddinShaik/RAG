@@ -79,7 +79,7 @@ query_type = Select(
 pdf_select = Select(
     id="Pdf",
     label="Select Pdf - Slot",
-    values=["chat", "slot-1", "slot-2", "slot-3", "slot-4"],
+    values=["chat", "slot-1", "slot-2", "slot-3", "nutrition"],
     initial_index=0,
 )
 hf_api = TextInput(
