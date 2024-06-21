@@ -9,7 +9,7 @@ from pinecone import Pinecone
 
 from RAG.entity.config_entity import SearchConfig
 from RAG.utils.common import setup_env
-from RAG.utils.prompts import PROMPTS, PROMPTS2, PROMPTS3, LLAMA
+from RAG.utils.prompts import PROMPTS, PROMPTS2, PROMPTS3, LLAMA, GEMMA
 
 
 class SearchAndAnswer:
@@ -94,7 +94,7 @@ class SearchAndAnswer:
         temperature,
         prompt_type,
         max_new_tokens=512,
-        format_answer_text=False,
+        format_answer_text=True,
         return_answer_only=True,
     ):
 
@@ -136,6 +136,8 @@ class SearchAndAnswer:
     def ask_cpu(self, base_prompt, temperature, hf_key, model, max_new_tokens=512):
         API_URL = f"https://api-inference.huggingface.co/models/{model}"
         API_TOKEN = hf_key
+        if "gemma" in model:
+            base_prompt = GEMMA["user"].format(msg=base_prompt)
         payload = {
             "inputs": base_prompt,
             "parameters": {
