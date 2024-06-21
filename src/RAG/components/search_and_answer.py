@@ -24,13 +24,12 @@ class SearchAndAnswer:
             "slot-1": pd.DataFrame(),
             "slot-2": pd.DataFrame(),
             "slot-3": pd.DataFrame(),
-            "slot-4": pd.DataFrame(),
+            "nutrition": pd.DataFrame(config.data_file),
         }
         self.paths = {
             "slot-1": "",
             "slot-2": "",
             "slot-3": "",
-            "slot-4": "",
         }
         if self.config.device_name == "cuda":
             self.chat = LLAMA["system"].format(msg="You are a helpful AI assistant")

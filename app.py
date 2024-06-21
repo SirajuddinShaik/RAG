@@ -108,9 +108,7 @@ async def start():
     cl.user_session.set("hf", "")
     cl.user_session.set("model", "")
     cl.user_session.set("task", "")
-    cl.user_session.set(
-        "paths", {"chat": "", "slot-1": "", "slot-2": "", "slot-3": "", "slot-4": ""}
-    )
+    cl.user_session.set("paths", {"slot-1": "", "slot-2": "", "slot-3": ""})
     cl.user_session.set("slot", "chat")
     cl.user_session.set("err", "Setup Api Keys")
     cl.user_session.set("api_status", False)
@@ -170,7 +168,9 @@ async def on_message(msg: cl.Message):
 
 async def load_pdf_to_pinecone():
     index_name = cl.user_session.get("slot")
-
+    if index_name in ["chat", "nutrition"]:
+        msg = cl.Message(content=f"Can't Upload in {index_name}!")
+        await msg.send()
     res = await cl.AskActionMessage(
         content="Ready to Upload!",
         actions=[
@@ -201,7 +201,9 @@ async def load_pdf_to_pinecone():
 
 async def load_pdf():
     index_name = cl.user_session.get("slot")
-
+    if index_name in ["chat", "nutrition"]:
+        msg = cl.Message(content=f"Can't Upload in {index_name}!")
+        await msg.send()
     res = await cl.AskActionMessage(
         content="Ready to Upload!",
         actions=[
