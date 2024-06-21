@@ -54,6 +54,7 @@ model_select = Select(
         "openai-community/gpt2",
         "Llama-3(gpu)",
         "google/gemma-2b-it",
+        "google/gemma-2b",
         "openai-community/gpt2-xl",
         "microsoft/Phi-3-vision-128k-instruct",
     ],
@@ -65,6 +66,7 @@ query_type = Select(
     label="Select Task - Type",
     values=[
         "chat",
+        "system",
         "detailed_prompt",
         "short_prompt",
         "summary_prompt",
@@ -149,22 +151,21 @@ async def on_message(msg: cl.Message):
         await load_pdf()
         return
     else:
-        obj = cl.user_session.get("searcher")
-        ans = obj.chainlit_prompt(
-            msg.content,
-            cl.user_session.get("task"),
-            cl.user_session.get("pc"),
-            cl.user_session.get("hf"),
-            cl.user_session.get("slot"),
-            cl.user_session.get("model"),
-        )
-        if ans:
-            msg = cl.Message(content=ans[0]["generated_text"])
-            await msg.send()
-        else:
-            msg = cl.Message(content="TimeOut Because its Free1")
-            await msg.send()
-        return
+        try:
+            obj = cl.user_session.get("searcher")
+            ans = obj.chainlit_prompt(
+                msg.content,
+                cl.user_session.get("task"),
+                cl.user_session.get("pc"),
+                cl.user_session.get("hf"),
+                cl.user_session.get("slot"),
+                cl.user_session.get("model"),
+            )
+            if ans:
+                msg = cl.Message(content=ans)
+                await msg.send()
+        except Exception as e:
+            msg = cl.Message(content="Error: " + str(e))
 
 
 async def load_pdf_to_pinecone():

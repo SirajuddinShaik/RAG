@@ -36,9 +36,7 @@ class SearchAnswerPipeline:
             return output_text
         except Exception as e:
             print(e)
-            return [
-                {"generated_text": "data or pdf not loaded in the slot or " + str(e)}
-            ]
+            return "data or pdf not loaded in the slot or " + str(e)
 
 
 if __name__ == "__main__":

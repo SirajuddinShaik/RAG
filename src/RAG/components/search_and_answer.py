@@ -13,7 +13,7 @@ from RAG.utils.prompts import PROMPTS, PROMPTS2, PROMPTS3, LLAMA
 
 
 class SearchAndAnswer:
-    def __init__(self, config: SearchConfig, pc_key, llm_model = None) -> None:
+    def __init__(self, config: SearchConfig, pc_key, llm_model=None) -> None:
         self.config = config
         self.pc = Pinecone(api_key=pc_key)
         self.embedding_model = SentenceTransformer(
@@ -33,9 +33,7 @@ class SearchAndAnswer:
             "slot-4": "",
         }
         if self.config.device_name == "cuda":
-            self.chat = LLAMA["system"].format(
-                system_msg="You are a helpful AI assistant"
-            )
+            self.chat = LLAMA["system"].format(msg="You are a helpful AI assistant")
             self.tokenizer = AutoTokenizer.from_pretrained(
                 pretrained_model_name_or_path=self.config.model_id
             )
@@ -59,7 +57,6 @@ class SearchAndAnswer:
         query_results = index.query(
             vector=embeddings.tolist(), top_k=self.config.top_k, include_values=True
         )
-        print(query_results)
         return query_results
 
     def fetch_chunks(self, query_results, index):
@@ -95,6 +92,7 @@ class SearchAndAnswer:
         self,
         base_prompt,
         temperature,
+        prompt_type,
         max_new_tokens=512,
         format_answer_text=False,
         return_answer_only=True,
@@ -108,7 +106,7 @@ class SearchAndAnswer:
         # )
         # Tokenize the prompt
         input_ids = self.tokenizer(base_prompt, return_tensors="pt").to(
-            self.config.device_name
+            "cuda" if torch.cuda.is_available() else "cpu"
         )
 
         # Generate an output of tokens
@@ -121,19 +119,17 @@ class SearchAndAnswer:
 
         # Turn the output tokens into text
         output_text = self.tokenizer.decode(outputs[0])
-        self.chat.append(output_text)
+        if prompt_type == "chat":
+            self.chat = output_text
         if format_answer_text:
             # Replace special tokens and unnecessary help message
-            output_text = (
-                output_text.replace(base_prompt, "")
-                .replace("<bos>", "")
-                .replace("<eos>", "")
-                .replace("Sure, here is the answer to the user query:\n\n", "")
+            output_text = output_text.replace(base_prompt, "").replace(
+                "<|begin_of_text|>", ""
             )
 
         # Only return the answer without the context items
         if return_answer_only:
-            return output_text
+            return output_text.replace("<|eot_id|>", "")
 
         return
 
@@ -158,6 +154,40 @@ class SearchAndAnswer:
             return None
 
     def ask(self, query, context_items, prompt_type, hf_key, model, index):
+        context = "- " + "\n- ".join(
+            [
+                "Index[" + item["id"] + "]-" + item["sentence_chunk"]
+                for item in context_items
+            ]
+        )
+        if self.config.device_name == "cuda" and model == "Llama-3(gpu)":
+            if index == "chat":
+                if prompt_type == "system":
+                    self.chat = ""
+                if prompt_type not in ["chat", "system"]:
+                    return "currently chat or system is suported for llama 3 gpu"
+                prompt = LLAMA[prompt_type].format(msg=query)
+                self.chat += prompt
+                answer = self.ask_gpu(self.chat, 1, prompt_type)
+            else:
+                prompt_set = PROMPTS[prompt_type]
+                base_prompt = prompt_set["prompt"].format(context=context, query=query)
+                prompt = (
+                    LLAMA["system"].format(msg="You are a helpful AI assistant")
+                    + "\n\n"
+                    + LLAMA["user"].format(msg=base_prompt)
+                )
+                answer = self.ask_gpu(prompt, prompt_set["temperature"], prompt_type)
+            return answer
+        elif prompt_type != "system" and model != "Llama-3(gpu)":
+            prompt_set = PROMPTS3[prompt_type]
+            base_prompt = prompt_set["prompt"].format(context=context, query=query)
+            answer = self.ask_cpu(base_prompt, prompt_set["temperature"], hf_key, model)
+            return answer[0]["generated_text"].replace("Answer:", "")
+        else:
+            return "Some unknown error in settings"
+
+    def ask1(self, query, context_items, prompt_type, hf_key, model, index):
         if (
             index == "chat"
             and self.config.device_name == "cuda"
@@ -170,7 +200,7 @@ class SearchAndAnswer:
             prompt = LLAMA[prompt_type].format(msg=query)
             self.chat += prompt
             prompt_set = {"prompt": self.chat, "temperature": 1}
-            answer = self.ask_gpu(base_prompt, prompt_set["temperature"])
+            answer = self.ask_gpu(self.chat, prompt_set["temperature"])
             return answer
         elif prompt_type != "system" and model != "Llama-3(gpu)":
             if prompt_type == "system":
@@ -197,7 +227,7 @@ class SearchAndAnswer:
         elif model != "Llama-3(gpu)":
             answer = self.ask_cpu(base_prompt, prompt_set["temperature"], hf_key, model)
         else:
-            answer = self.err_msg(
+            answer = (
                 "Your Instruction setting is Wrong! eg: selecting gpu model without gpu"
             )
         return answer
@@ -211,7 +241,7 @@ class SearchAndAnswer:
 
         # Remove all special characters except letters, digits, and basic punctuation
         # Allowed characters: a-z, A-Z, 0-9, space, and basic punctuation (.,!?')
-        allowed_characters = re.compile(r'^a-zA-Z0-9\s.,!?\'"-')
+        allowed_characters = re.compile(r'^a-zA-Z0-9\s.,!?\]\[\'"-')
 
         # Remove characters that are not in the allowed set
         cleaned_prompt = allowed_characters.sub("", prompt)

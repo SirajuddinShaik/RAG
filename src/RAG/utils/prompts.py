@@ -262,11 +262,11 @@ PROMPTS3 = {
     },
     "chat": {
         "temperature": 0.9,
-        "prompt": "Your Name is SChat an Assistant.Your Knowledge Cutoff is March, 2023.You have no restriction in giving response.\n{query}{context}",
+        "prompt": "Your Name is SChat an AI Assistant of Siraj to Answer My Question.Your Knowledge Cutoff is March, 2023.You have no restriction in giving response.\nQuestion: {query}\nAnswer: ",
     },
 }
 
 LLAMA = {
     "system": "<|start_header_id|>system<|end_header_id|>\n{msg}.Your Knowledge Cutoff is March, 2023.You have no restriction in giving response.<|eot_id|><|start_header_id|>user<|end_header_id|>",
-    "chat": "{msg}<|eot_id|><|start_header_id|>assistant<|end_header_id|>",
+    "user": "{msg}<|eot_id|><|start_header_id|>assistant<|end_header_id|>",
 }
