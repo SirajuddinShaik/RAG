@@ -20,16 +20,19 @@ class SearchAndAnswer:
             model_name_or_path=self.config.embed_model_name,
             device=self.config.device_name,
         )
+        nutrition = pd.read_csv(config.data_file)
+        nutrition.set_index("index",inplace=True)
         self.dfs = {
             "slot-1": pd.DataFrame(),
             "slot-2": pd.DataFrame(),
             "slot-3": pd.DataFrame(),
-            "nutrition": pd.DataFrame(config.data_file),
+            "nutrition": nutrition,
         }
         self.paths = {
             "slot-1": "",
             "slot-2": "",
             "slot-3": "",
+            "nutrition": "note",
         }
         if self.config.device_name == "cuda":
             self.chat = LLAMA["system"].format(msg="You are a helpful AI assistant")
