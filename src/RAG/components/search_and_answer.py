@@ -21,7 +21,7 @@ class SearchAndAnswer:
             device=self.config.device_name,
         )
         nutrition = pd.read_csv(config.data_file)
-        nutrition.set_index("index",inplace=True)
+        nutrition.set_index("index", inplace=True)
         self.dfs = {
             "slot-1": pd.DataFrame(),
             "slot-2": pd.DataFrame(),
@@ -54,8 +54,6 @@ class SearchAndAnswer:
     def retrive_similar_enbeddings(self, query: str, index=None):
         if not index:
             index = self.config.index_name
-        if index == "nutrition":
-            index = "slot-4"
         index = self.pc.Index(index)
         embeddings = self.embedding_model.encode(query)
         query_results = index.query(

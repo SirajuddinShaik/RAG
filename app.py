@@ -1,13 +1,15 @@
 from io import BytesIO
+import threading
+import time
 import fitz
 from pinecone import Pinecone
 
-from chainlit.input_widget import Select, TextInput
 import chainlit as cl
 from tqdm.auto import tqdm
 
 from RAG.pipeline.stage_01_data_ingestion import DataIngestionPipeLine
 from RAG.pipeline.stage_02_search_answer import SearchAnswerPipeline
+from RAG.utils.wigets import *
 
 llm_model = None
 import torch
@@ -15,10 +17,6 @@ import torch
 if torch.cuda.is_available():
     from transformers import AutoTokenizer, AutoModelForCausalLM
     from transformers.utils import is_flash_attn_2_available
-
-    # 1. Create quantization config for smaller model loading (optional)
-    # Requires !pip install bitsandbytes accelerate, see: https://github.com/TimDettmers/bitsandbytes, https://huggingface.co/docs/accelerate/
-    # For models that require 4-bit quantization (use this if you have low GPU memory available)
     from transformers import BitsAndBytesConfig
 
     quantization_config = BitsAndBytesConfig(
@@ -45,58 +43,6 @@ if torch.cuda.is_available():
         low_cpu_mem_usage=True,  # use full memory
         attn_implementation=attn_implementation,
     )  # which attention version to use
-
-
-model_select = Select(
-    id="Model",
-    label="select - Model",
-    values=[
-        "openai-community/gpt2",
-        "Llama-3(gpu)",
-        "google/gemma-2b-it",
-        "google/gemma-2b",
-        "openai-community/gpt2-xl",
-        "microsoft/Phi-3-vision-128k-instruct",
-    ],
-    initial_index=0,
-)
-
-query_type = Select(
-    id="Query",
-    label="Select Task - Type",
-    values=[
-        "chat",
-        "system",
-        "detailed_prompt",
-        "short_prompt",
-        "summary_prompt",
-        "explanation_prompt",
-        "opinion_prompt",
-        "instruction_prompt",
-    ],
-    initial_index=0,
-)
-pdf_select = Select(
-    id="Pdf",
-    label="Select Pdf - Slot",
-    values=["chat", "slot-1", "slot-2", "slot-3", "nutrition"],
-    initial_index=0,
-)
-hf_api = TextInput(
-    id="hf_key",
-    label="Enter your Huggingface API key",
-    placeholder="hf-...",
-)
-pc_api = TextInput(
-    id="pc_key", label="Enter your Pinecone API key", placeholder="sk-..."
-)
-
-
-@cl.on_message
-async def on_message(message: cl.Message):
-    print(message.content)  # type: Runnable
-
-    await cl.Message(content="hlo how are you").send()
 
 
 @cl.on_chat_start
@@ -137,30 +83,44 @@ async def start():
 
 @cl.on_message
 async def on_message(msg: cl.Message):
+    query = msg.content
     print(cl.user_session.get("paths"))
     if not cl.user_session.get("api_status"):
         msg1 = cl.ErrorMessage(content=cl.user_session.get("err"))
         await msg1.send()
         return
-    if msg.content == ".pdf":
+    if query == ".pdf":
         await load_pdf_to_pinecone()
         return
-    if msg.content == ".data":
+    if query == ".data":
         await load_pdf()
         return
     else:
         try:
             obj = cl.user_session.get("searcher")
-            ans = obj.chainlit_prompt(
-                msg.content,
+            t = WorkerThread()
+            t.obj = obj
+            t.arg = (
+                query,
                 cl.user_session.get("task"),
                 cl.user_session.get("pc"),
                 cl.user_session.get("hf"),
                 cl.user_session.get("slot"),
                 cl.user_session.get("model"),
             )
-            if ans:
-                msg = cl.Message(content=ans)
+
+            t.start()
+            c = 1
+            while not t.done:
+                print(c)
+                if c % 15 == 0:
+                    msg = cl.Message(content="taking Longer!")
+                    await msg.send()
+                time.sleep(1)
+                c += 1
+            t.join()
+            if t.result:
+                msg = cl.Message(content=t.result)
                 await msg.send()
         except Exception as e:
             msg = cl.Message(content="Error: " + str(e))
@@ -171,6 +131,7 @@ async def load_pdf_to_pinecone():
     if index_name in ["chat", "nutrition"]:
         msg = cl.Message(content=f"Can't Upload in {index_name}!")
         await msg.send()
+        return
     res = await cl.AskActionMessage(
         content="Ready to Upload!",
         actions=[
@@ -204,6 +165,7 @@ async def load_pdf():
     if index_name in ["chat", "nutrition"]:
         msg = cl.Message(content=f"Can't Upload in {index_name}!")
         await msg.send()
+        return
     res = await cl.AskActionMessage(
         content="Ready to Upload!",
         actions=[
@@ -263,6 +225,23 @@ async def verify_keys(settings):
             return
         cl.user_session.set("hf", settings["hf_key"])
         cl.user_session.set("api_status", True)
+        msg = cl.Message(content="All Set 😎!")
+        await msg.send()
     cl.user_session.set("model", settings["Model"])
     cl.user_session.set("slot", settings["Pdf"])
     cl.user_session.set("task", settings["Query"])
+
+
+class WorkerThread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.done = False
+        self.arg = None
+        self.result = None
+        self.obj = None
+
+    def run(self):
+        print(*self.arg)
+        ans = self.obj.chainlit_prompt(*self.arg)
+        self.result = ans
+        self.done = True
