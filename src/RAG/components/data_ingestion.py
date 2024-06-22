@@ -124,7 +124,10 @@ class DataIngestion:
             batch_size=32,
             convert_to_tensor=True,
         )
-        text_chunks_embeddings = text_chunks_embeddings.cpu()
+
+        temp = text_chunks_embeddings.cpu()
+        del text_chunks_embeddings
+        text_chunks_embeddings = temp
         logger.info(">>>>>>>> Embedding Completed <<<<<<<<<")
         # for i, data in enumerate(pages_and_chunks_over_min_token_len):
         pages_and_chunks_over_min_token_len["embeddings"] = [
