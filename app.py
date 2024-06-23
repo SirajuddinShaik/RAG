@@ -1,6 +1,4 @@
 from io import BytesIO
-import threading
-import time
 import fitz
 from pinecone import Pinecone
 
@@ -98,32 +96,8 @@ async def on_message(msg: cl.Message):
     else:
         try:
             obj = cl.user_session.get("searcher")
-            # t = WorkerThread()
-            # t.obj = obj
-            # t.arg = (
-            #     query,
-            #     cl.user_session.get("task"),
-            #     cl.user_session.get("pc"),
-            #     cl.user_session.get("hf"),
-            #     cl.user_session.get("slot"),
-            #     cl.user_session.get("model"),
-            # )
-
-            # t.start()
-            # c = 1
-            # while not t.done:
-            #     print(c)
-            #     if c % 15 == 0:
-            #         msg = cl.Message(content="taking Longer!")
-            #         await msg.send()
-            #     time.sleep(1)
-            #     c += 1
-            # t.join()
-            # if t.result:
-            #     msg = cl.Message(content=t.result)
-            #     await msg.send()
-            # msg = cl.Message(content="hlol")
-            # await msg.send()
+            msg = cl.Message(content="")
+            await msg.send()
 
             msg = cl.Message(
                 content=obj.chainlit_prompt(
@@ -245,18 +219,3 @@ async def verify_keys(settings):
     cl.user_session.set("model", settings["Model"])
     cl.user_session.set("slot", settings["Pdf"])
     cl.user_session.set("task", settings["Query"])
-
-
-class WorkerThread(threading.Thread):
-    def __init__(self):
-        threading.Thread.__init__(self)
-        self.done = False
-        self.arg = None
-        self.result = None
-        self.obj = None
-
-    def run(self):
-        print(*self.arg)
-        ans = self.obj.chainlit_prompt(*self.arg)
-        self.result = ans
-        self.done = True
