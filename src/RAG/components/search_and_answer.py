@@ -35,7 +35,7 @@ class SearchAndAnswer:
             "nutrition": "note",
         }
         if self.config.device_name == "cuda":
-            self.chat = LLAMA["system"].format(msg="You are a helpful AI assistant")
+            self.chat = LLAMA["system-u"].format(msg="You are a helpful AI assistant")
             self.tokenizer = AutoTokenizer.from_pretrained(
                 pretrained_model_name_or_path=self.config.model_id
             )
@@ -121,12 +121,15 @@ class SearchAndAnswer:
 
         # Turn the output tokens into text
         output_text = self.tokenizer.decode(outputs[0])
+        print(output_text)
         if prompt_type == "chat":
             self.chat = output_text
         if format_answer_text:
             # Replace special tokens and unnecessary help message
-            output_text = output_text.replace(base_prompt, "").replace(
-                "<|begin_of_text|>", ""
+            output_text = (
+                output_text.replace(base_prompt, "")
+                .replace(base_prompt, "")
+                .replace("<|begin_of_text|>", "")
             )
 
         # Only return the answer without the context items
