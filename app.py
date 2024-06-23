@@ -98,30 +98,45 @@ async def on_message(msg: cl.Message):
     else:
         try:
             obj = cl.user_session.get("searcher")
-            t = WorkerThread()
-            t.obj = obj
-            t.arg = (
-                query,
-                cl.user_session.get("task"),
-                cl.user_session.get("pc"),
-                cl.user_session.get("hf"),
-                cl.user_session.get("slot"),
-                cl.user_session.get("model"),
-            )
+            # t = WorkerThread()
+            # t.obj = obj
+            # t.arg = (
+            #     query,
+            #     cl.user_session.get("task"),
+            #     cl.user_session.get("pc"),
+            #     cl.user_session.get("hf"),
+            #     cl.user_session.get("slot"),
+            #     cl.user_session.get("model"),
+            # )
 
-            t.start()
-            c = 1
-            while not t.done:
-                print(c)
-                if c % 15 == 0:
-                    msg = cl.Message(content="taking Longer!")
-                    await msg.send()
-                time.sleep(1)
-                c += 1
-            t.join()
-            if t.result:
-                msg = cl.Message(content=t.result)
-                await msg.send()
+            # t.start()
+            # c = 1
+            # while not t.done:
+            #     print(c)
+            #     if c % 15 == 0:
+            #         msg = cl.Message(content="taking Longer!")
+            #         await msg.send()
+            #     time.sleep(1)
+            #     c += 1
+            # t.join()
+            # if t.result:
+            #     msg = cl.Message(content=t.result)
+            #     await msg.send()
+            # msg = cl.Message(content="hlol")
+            # await msg.send()
+
+            msg = cl.Message(
+                content=obj.chainlit_prompt(
+                    query,
+                    cl.user_session.get("task"),
+                    cl.user_session.get("pc"),
+                    cl.user_session.get("hf"),
+                    cl.user_session.get("slot"),
+                    cl.user_session.get("model"),
+                )
+            )
+            await msg.send()
+
         except Exception as e:
             msg = cl.Message(content="Error: " + str(e))
 
