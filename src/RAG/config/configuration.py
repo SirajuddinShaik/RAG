@@ -1,5 +1,5 @@
 from RAG.constants import *
-from RAG.entity.config_entity import DataIngestionConfig, SearchConfig
+from RAG.entity.config_entity import DataIngestionConfig, RefusalDataConfig, SearchConfig
 from RAG.utils.common import create_directories, read_yaml
 
 
@@ -46,3 +46,12 @@ class ConfigurationManager:
             model_id=config.model_id,
         )
         return search_retrival_config
+
+    def get_refusal_data_ingestion_config(self)->RefusalDataConfig:
+        config = self.config.refusal_data_ingestion
+
+        refusal_data_ingestion_config = RefusalDataConfig(
+            source_uri=config.source_uri,
+            local_data_file=config.local_data_file
+        )
+        return refusal_data_ingestion_config

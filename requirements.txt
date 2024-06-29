@@ -20,4 +20,5 @@ sentence_transformers
 pinecone-client
 transformers
 torch
+datasets
 chainlit

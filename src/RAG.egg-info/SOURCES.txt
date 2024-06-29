@@ -8,6 +8,8 @@ src/RAG.egg-info/dependency_links.txt
 src/RAG.egg-info/top_level.txt
 src/RAG/components/__init__.py
 src/RAG/components/data_ingestion.py
+src/RAG/components/refusal_data_ingestion.py
+src/RAG/components/search_and_answer.py
 src/RAG/config/__init__.py
 src/RAG/config/configuration.py
 src/RAG/constants/__init__.py
@@ -15,5 +17,9 @@ src/RAG/entity/__init__.py
 src/RAG/entity/config_entity.py
 src/RAG/pipeline/__init__.py
 src/RAG/pipeline/stage_01_data_ingestion.py
+src/RAG/pipeline/stage_02_search_answer.py
+src/RAG/pipeline/stage_11_data_ingestion.py
 src/RAG/utils/__init__.py
 src/RAG/utils/common.py
+src/RAG/utils/prompts.py
+src/RAG/utils/wigets.py

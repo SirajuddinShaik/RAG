@@ -20,3 +20,8 @@ class SearchConfig:
     embed_model_name: str
     data_file: Path
     model_id: str
+
+@dataclass(frozen=True)
+class RefusalDataConfig:
+    source_uri: str
+    local_data_file: Path

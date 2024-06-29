@@ -1,20 +1,21 @@
-
-
 data_ingestion:
-    root_dir: artifacts/data_ingestion
-    source_uri: https://raw.githubusercontent.com/mrdbourke/simple-local-rag/main/human-nutrition-text.pdf
-    local_data_file: artifacts/data_ingestion/human-nutrition-text.pdf
-    chunk_size: 10
-    device_name: cpu
-    model_name: all-mpnet-base-v2
-    min_token_length: 30
-    index_name: rag-index
+  root_dir: artifacts/data_ingestion
+  source_uri: https://raw.githubusercontent.com/mrdbourke/simple-local-rag/main/human-nutrition-text.pdf
+  local_data_file: artifacts/data_ingestion/human-nutrition-text.pdf
+  chunk_size: 10
+  device_name: cpu
+  model_name: all-mpnet-base-v2
+  min_token_length: 30
+  index_name: rag-index
 
 search_and_retrive:
-    index_name: rag-index
-    top_k: 4
-    device_name: cpu
-    embed_model_name: all-mpnet-base-v2
-    data_file: artifacts/data_ingestion/data.csv
-    model_id: meta-llama/Meta-Llama-3-8B-Instruct
-  
+  index_name: rag-index
+  top_k: 4
+  device_name: cpu
+  embed_model_name: all-mpnet-base-v2
+  data_file: artifacts/data_ingestion/data.csv
+  model_id: meta-llama/Meta-Llama-3-8B-Instruct
+
+refusal_data_ingestion:
+  source_uri: https://raw.githubusercontent.com/llm-attacks/llm-attacks/main/data/advbench/harmful_behaviors.csv
+  local_data_file: artifacts/data_ingestion/harmfull_data_set.csv

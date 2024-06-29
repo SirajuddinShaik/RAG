@@ -1685,3 +1685,156 @@ KeyError: '863_2'
 [2024-06-19 12:11:36,438: INFO: common: yaml file: params.yaml loaded successfully]
 [2024-06-19 12:11:36,440: INFO: common: yaml file: schema.yaml loaded successfully]
 [2024-06-19 12:11:36,443: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-06-29 07:53:17,864: INFO: stage_11_data_ingestion: >>>>>>>> Refusal Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-29 07:53:17,867: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-06-29 07:53:17,869: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-29 07:53:17,869: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-29 07:53:17,870: ERROR: stage_11_data_ingestion: "'ConfigBox' object has no attribute 'source_uri'"]
+Traceback (most recent call last):
+  File "box/box.py", line 503, in box.box.Box.__getitem__
+KeyError: 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "box/box.py", line 536, in box.box.Box.__getattr__
+  File "box/box.py", line 524, in box.box.Box.__getitem__
+box.exceptions.BoxKeyError: "'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "box/box.py", line 538, in box.box.Box.__getattr__
+AttributeError: 'ConfigBox' object has no attribute 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "box/config_box.py", line 28, in box.config_box.ConfigBox.__getattr__
+  File "box/box.py", line 552, in box.box.Box.__getattr__
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "box/box.py", line 503, in box.box.Box.__getitem__
+KeyError: 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "box/box.py", line 536, in box.box.Box.__getattr__
+  File "box/box.py", line 524, in box.box.Box.__getitem__
+box.exceptions.BoxKeyError: "'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "box/box.py", line 538, in box.box.Box.__getattr__
+AttributeError: 'ConfigBox' object has no attribute 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_11_data_ingestion.py", line 21, in <module>
+    obj = RefugalDataIngestionPipeline()
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_11_data_ingestion.py", line 10, in __init__
+    self.data_ingestion_config = config.get_refusal_data_ingestion_config()
+  File "/teamspace/studios/this_studio/RAG/src/RAG/config/configuration.py", line 54, in get_refusal_data_ingestion_config
+    source_url=config.source_uri,
+  File "box/config_box.py", line 30, in box.config_box.ConfigBox.__getattr__
+  File "box/box.py", line 552, in box.box.Box.__getattr__
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'source_uri'"
+[2024-06-29 07:53:50,644: INFO: stage_11_data_ingestion: >>>>>>>> Refusal Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-29 07:53:50,649: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-06-29 07:53:50,649: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-29 07:53:50,650: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-29 07:53:50,650: ERROR: stage_11_data_ingestion: "'ConfigBox' object has no attribute 'source_uri'"]
+Traceback (most recent call last):
+  File "box/box.py", line 503, in box.box.Box.__getitem__
+KeyError: 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "box/box.py", line 536, in box.box.Box.__getattr__
+  File "box/box.py", line 524, in box.box.Box.__getitem__
+box.exceptions.BoxKeyError: "'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "box/box.py", line 538, in box.box.Box.__getattr__
+AttributeError: 'ConfigBox' object has no attribute 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "box/config_box.py", line 28, in box.config_box.ConfigBox.__getattr__
+  File "box/box.py", line 552, in box.box.Box.__getattr__
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "box/box.py", line 503, in box.box.Box.__getitem__
+KeyError: 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "box/box.py", line 536, in box.box.Box.__getattr__
+  File "box/box.py", line 524, in box.box.Box.__getitem__
+box.exceptions.BoxKeyError: "'source_uri'"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "box/box.py", line 538, in box.box.Box.__getattr__
+AttributeError: 'ConfigBox' object has no attribute 'source_uri'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_11_data_ingestion.py", line 21, in <module>
+    obj = RefugalDataIngestionPipeline()
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_11_data_ingestion.py", line 10, in __init__
+    self.data_ingestion_config = config.get_refusal_data_ingestion_config()
+  File "/teamspace/studios/this_studio/RAG/src/RAG/config/configuration.py", line 54, in get_refusal_data_ingestion_config
+    source_uri=config.source_uri,
+  File "box/config_box.py", line 30, in box.config_box.ConfigBox.__getattr__
+  File "box/box.py", line 552, in box.box.Box.__getattr__
+box.exceptions.BoxKeyError: "'ConfigBox' object has no attribute 'source_uri'"
+[2024-06-29 07:54:11,810: INFO: stage_11_data_ingestion: >>>>>>>> Refusal Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-29 07:54:11,813: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-06-29 07:54:11,814: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-29 07:54:11,814: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-29 07:54:11,814: ERROR: stage_11_data_ingestion: RefusalDataConfig.__init__() got an unexpected keyword argument 'source_uri']
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_11_data_ingestion.py", line 21, in <module>
+    obj = RefugalDataIngestionPipeline()
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_11_data_ingestion.py", line 10, in __init__
+    self.data_ingestion_config = config.get_refusal_data_ingestion_config()
+  File "/teamspace/studios/this_studio/RAG/src/RAG/config/configuration.py", line 53, in get_refusal_data_ingestion_config
+    refusal_data_ingestion_config = RefusalDataConfig(
+TypeError: RefusalDataConfig.__init__() got an unexpected keyword argument 'source_uri'
+[2024-06-29 07:56:27,992: INFO: stage_11_data_ingestion: >>>>>>>> Refusal Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-29 07:56:27,995: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-06-29 07:56:27,996: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-29 07:56:27,997: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-29 07:56:27,997: ERROR: stage_11_data_ingestion: 'RefusalDataIngestion' object has no attribute 'config']
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_11_data_ingestion.py", line 22, in <module>
+    obj.main()
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_11_data_ingestion.py", line 15, in main
+    data_ingestion.get_harmful_instructions()
+  File "/teamspace/studios/this_studio/RAG/src/RAG/components/refusal_data_ingestion.py", line 14, in get_harmful_instructions
+    if not os.path.exists(self.config.local_data_file):
+AttributeError: 'RefusalDataIngestion' object has no attribute 'config'
+[2024-06-29 07:56:56,541: INFO: stage_11_data_ingestion: >>>>>>>> Refusal Data Ingestion stage Started <<<<<<<<<<<<]
+[2024-06-29 07:56:56,544: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-06-29 07:56:56,544: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-06-29 07:56:56,545: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-06-29 07:56:56,545: INFO: refusal_data_ingestion: File Doesn't Exist!>>> let's Download]
+[2024-06-29 07:56:56,686: INFO: refusal_data_ingestion: >>>>>> Downloaded to artifacts/data_ingestion/harmfull_data_set.csv]
+[2024-06-29 07:56:56,686: INFO: stage_11_data_ingestion: >>>>>>>> Refusal Data Ingestion stage Completed <<<<<<<<<<]
