@@ -3,7 +3,7 @@ data_ingestion:
   source_uri: https://raw.githubusercontent.com/mrdbourke/simple-local-rag/main/human-nutrition-text.pdf
   local_data_file: artifacts/data_ingestion/human-nutrition-text.pdf
   chunk_size: 10
-  device_name: cpu
+  device_name: cuda
   model_name: all-mpnet-base-v2
   min_token_length: 30
   index_name: rag-index
@@ -11,7 +11,7 @@ data_ingestion:
 search_and_retrive:
   index_name: rag-index
   top_k: 4
-  device_name: cpu
+  device_name: cuda
   embed_model_name: all-mpnet-base-v2
   data_file: artifacts/data_ingestion/data.csv
   model_id: meta-llama/Meta-Llama-3-8B-Instruct

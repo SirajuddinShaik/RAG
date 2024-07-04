@@ -1838,3 +1838,8 @@ AttributeError: 'RefusalDataIngestion' object has no attribute 'config'
 [2024-06-29 07:56:56,545: INFO: refusal_data_ingestion: File Doesn't Exist!>>> let's Download]
 [2024-06-29 07:56:56,686: INFO: refusal_data_ingestion: >>>>>> Downloaded to artifacts/data_ingestion/harmfull_data_set.csv]
 [2024-06-29 07:56:56,686: INFO: stage_11_data_ingestion: >>>>>>>> Refusal Data Ingestion stage Completed <<<<<<<<<<]
+[2024-07-01 16:23:11,410: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-07-01 16:23:11,413: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-07-01 16:23:11,415: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-07-01 16:23:14,238: INFO: config: PyTorch version 2.2.1+cu121 available.]
+[2024-07-01 16:23:14,665: INFO: refusal_data_ingestion: File Already Exist!]
