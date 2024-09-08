@@ -27,6 +27,7 @@ class ConfigurationManager:
             device_name=config.device_name,
             model_name=config.model_name,
             min_token_length=config.min_token_length,
+            data_file=config.data_file,
             index_name=config.index_name,
         )
 

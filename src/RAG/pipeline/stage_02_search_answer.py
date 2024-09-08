@@ -29,6 +29,7 @@ class SearchAnswerPipeline:
                 query_results = self.query_answer.fetch_chunks(query_embeddings, index)
             else:
                 query_results = []
+            print("Done query results")
             output_text = self.query_answer.ask(
                 query, query_results, prompt, hf_key, model, index
             )

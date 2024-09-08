@@ -10,6 +10,7 @@ class DataIngestionConfig:
     device_name: str
     model_name: str
     min_token_length: int
+    data_file: Path
     index_name: str
 
 @dataclass(frozen=True)

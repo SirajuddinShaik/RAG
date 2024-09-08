@@ -1843,3 +1843,21 @@ AttributeError: 'RefusalDataIngestion' object has no attribute 'config'
 [2024-07-01 16:23:11,415: INFO: common: yaml file: schema.yaml loaded successfully]
 [2024-07-01 16:23:14,238: INFO: config: PyTorch version 2.2.1+cu121 available.]
 [2024-07-01 16:23:14,665: INFO: refusal_data_ingestion: File Already Exist!]
+[2024-09-07 12:08:05,796: INFO: config: PyTorch version 2.2.1+cu121 available.]
+[2024-09-07 12:08:06,094: INFO: stage_02_search_answer: >>>>>>>> Search Answer stage Started <<<<<<<<<<<<]
+[2024-09-07 12:08:06,097: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-09-07 12:08:06,097: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-09-07 12:08:06,098: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-09-07 12:08:06,098: INFO: discover_namespace_packages: Discovering subpackages in _NamespacePath(['/home/zeus/miniconda3/envs/cloudspace/lib/python3.10/site-packages/pinecone_plugins'])]
+[2024-09-07 12:08:06,099: INFO: discover_plugins: Looking for plugins in pinecone_plugins.inference]
+[2024-09-07 12:08:06,106: INFO: installation: Installing plugin inference into PineconeGRPC]
+[2024-09-07 12:08:06,107: INFO: SentenceTransformer: Load pretrained SentenceTransformer: all-mpnet-base-v2]
+[2024-09-07 12:08:06,417: ERROR: stage_02_search_answer: name 'library' is not defined]
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_02_search_answer.py", line 45, in <module>
+    obj = SearchAnswerPipeline("Pc-key...")
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/stage_02_search_answer.py", line 15, in __init__
+    self.query_answer = SearchAndAnswer(self.search_config, pc_key, llm_model)
+  File "/teamspace/studios/this_studio/RAG/src/RAG/components/search_and_answer.py", line 24, in __init__
+    library.set_index("index", inplace=True)
+NameError: name 'library' is not defined

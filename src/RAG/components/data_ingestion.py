@@ -82,7 +82,7 @@ class DataIngestion:
             for i in range(0, len(input_list), self.config.chunk_size - 3)
         ]
 
-    def split_chunks(self, pages_and_text: list, path=None) -> list:
+    def split_chunks(self, pages_and_text: list, book_name, path=None) -> list:
         if not path:
             path = self.config.root_dir + "/data"
         pages_and_chunks = []
@@ -92,20 +92,22 @@ class DataIngestion:
                 chunk_dict = {}
                 joined_chunk = "".join(sentence_chunk).replace("  ", " ").strip()
                 joined_chunk = re.sub(r"\.([A-Z])", r". \1", joined_chunk)
-                chunk_dict["index"] = f"{page_no+1}_{i}"
+                chunk_dict["index"] = book_name+"@"+f"{page_no+1}-{i}"
                 chunk_dict["sentence_chunk"] = joined_chunk
                 chunk_dict["chunk_char_count"] = len(joined_chunk)
                 chunk_dict["chunk_word_count"] = len(joined_chunk.split())
                 chunk_dict["chunk_token_count"] = len(joined_chunk) // 4
 
                 pages_and_chunks.append(chunk_dict)
-                pd.DataFrame(pages_and_chunks).drop(
+        book = pd.DataFrame(pages_and_chunks).drop(
                     columns=[
                         "chunk_token_count",
                         "chunk_word_count",
                         "chunk_char_count",
                     ]
-                ).to_csv(f"{path}.csv")
+                )
+        book.to_csv(f"{path}.csv",escapechar='\\')
+        self.conat_df(book)
         return pages_and_chunks
 
     def embed_chunks(self, pages_and_chunks: list) -> list:
@@ -121,7 +123,7 @@ class DataIngestion:
         ]
         text_chunks_embeddings = self.embedding_model.encode(
             text_chunks,
-            batch_size=32,
+            batch_size=64,
             convert_to_tensor=True,
         )
 
@@ -138,15 +140,14 @@ class DataIngestion:
     def to_vector_database(self, pages_and_chunks_over_min_token_len, index_name=None):
         if not index_name:
             index_name = self.config.index_name
-        if index_name in self.pc.list_indexes().names():
-            logger.warning(f"Index Already Exist! Deleting Index:{index_name}")
-            self.pc.delete_index(index_name)
-        self.pc.create_index(
-            name=index_name,
-            dimension=pages_and_chunks_over_min_token_len[0]["embeddings"].shape[0],
-            metric="cosine",
-            spec=ServerlessSpec(cloud="aws", region="us-east-1"),
-        )
+        if index_name not in self.pc.list_indexes().names():
+           
+            self.pc.create_index(
+                name=index_name,
+                dimension=pages_and_chunks_over_min_token_len[0]["embeddings"].shape[0],
+                metric="cosine",
+                spec=ServerlessSpec(cloud="aws", region="us-east-1"),
+            )
         logger.info("Data is Going To Load to Pinecone!")
         index = self.pc.Index(index_name)
         vectors = [
@@ -157,3 +158,10 @@ class DataIngestion:
         for batch in tqdm(vectors):
             index.upsert(vectors=batch)
         logger.info("Vectors Loaded to Pinecone")
+
+    def conat_df(self, book):
+        df = pd.read_csv(self.config.data_file)[["index","sentence_chunk"]]
+        print(book.columns)
+        print(df.columns)
+        new_df = pd.concat([df,book],ignore_index=True).drop_duplicates()
+        new_df.to_csv(self.config.data_file)

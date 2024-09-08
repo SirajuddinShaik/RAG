@@ -1,7 +1,8 @@
 from io import BytesIO
 from RAG.components.model import get_model
 import fitz
-from pinecone import Pinecone
+from pinecone import ServerlessSpec
+from pinecone.grpc import PineconeGRPC as Pinecone
 
 import chainlit as cl
 from tqdm.auto import tqdm
@@ -13,6 +14,8 @@ from RAG.utils.wigets import *
 llm_model = None
 import torch
 
+from huggingface_hub import login
+login("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")
 if torch.cuda.is_available(): # which attention version to use
     llm_model = get_model()
 
@@ -27,6 +30,7 @@ async def start():
     cl.user_session.set("task", "")
     cl.user_session.set("paths", {"slot-1": "", "slot-2": "", "slot-3": ""})
     cl.user_session.set("slot", "chat")
+    cl.user_session.set("book_name", "")
     cl.user_session.set("err", "Setup Api Keys")
     cl.user_session.set("api_status", False)
     msg = cl.Message(content=f"Setup Your Api keys and Start")
@@ -55,12 +59,12 @@ async def start():
 @cl.on_message
 async def on_message(msg: cl.Message):
     query = msg.content
-    print(cl.user_session.get("paths"))
     if not cl.user_session.get("api_status"):
         msg1 = cl.ErrorMessage(content=cl.user_session.get("err"))
         await msg1.send()
         return
-    if query == ".pdf":
+    if ".add_book" in query:
+        cl.user_session.set("book_name", query.split("=")[1])
         await load_pdf_to_pinecone()
         return
     if query == ".data":
@@ -89,13 +93,10 @@ async def on_message(msg: cl.Message):
 
 
 async def load_pdf_to_pinecone():
-    index_name = cl.user_session.get("slot")
-    if index_name in ["chat", "nutrition"]:
-        msg = cl.Message(content=f"Can't Upload in {index_name}!")
-        await msg.send()
-        return
+    index_name = "library"
+    book_name = cl.user_session.get("book_name")
     res = await cl.AskActionMessage(
-        content="Ready to Upload!",
+        content=f"Ready to Upload The Book '{book_name}'!",
         actions=[
             cl.Action(name="continue", value="continue", label="✅ Continue"),
             cl.Action(name="cancel", value="cancel", label="❌ Cancel"),
@@ -116,15 +117,14 @@ async def load_pdf_to_pinecone():
         obj1 = cl.user_session.get("searcher")
         cl.user_session.set("paths", dict)
         obj = DataIngestionPipeLine()
-        obj.load_to_pincone(cl.user_session.get("pc"), file.path, index_name)
-        obj1.query_answer.setup_pd(dict)
+        obj.load_to_pincone(cl.user_session.get("pc"), file.path, index_name, book_name)
         msg = cl.Message(content=f"Uploaded to {index_name}! `Start messaging...`")
         await msg.send()
 
 
 async def load_pdf():
     index_name = cl.user_session.get("slot")
-    if index_name in ["chat", "nutrition"]:
+    if index_name in ["chat", "library"]:
         msg = cl.Message(content=f"Can't Upload in {index_name}!")
         await msg.send()
         return
@@ -166,8 +166,9 @@ async def verify_keys(settings):
                 "searcher", SearchAnswerPipeline(settings["pc_key"], llm_model)
             )
             cl.user_session.set("pc", settings["pc_key"])
-        except:
+        except Exception as e:
             message = "Invalid Pinecone Key"
+            print(e)
             cl.user_session.set("err", message)
             return
         import requests
@@ -183,6 +184,7 @@ async def verify_keys(settings):
         response = query("Can you please let us know more details about your ")
         if response.status_code == 400:
             message = "Invalid Hugging Face Token"
+            print(message)
             cl.user_session.set("err", message)
             return
         cl.user_session.set("hf", settings["hf_key"])
@@ -190,5 +192,5 @@ async def verify_keys(settings):
         msg = cl.Message(content="All Set 😎!")
         await msg.send()
     cl.user_session.set("model", settings["Model"])
-    cl.user_session.set("slot", settings["Pdf"])
     cl.user_session.set("task", settings["Query"])
+    cl.user_session.set("slot", settings["Pdf"])

@@ -23,16 +23,16 @@ class DataIngestionPipeLine:
         # data_ingestion.to_vector_database(pages_and_chunks_over_min_token_len)
         return pages_and_chunks_over_min_token_len
 
-    def load_to_pincone(self, api_key, file_path, index_name):
+    def load_to_pincone(self, api_key, file_path, index_name, book_name):
         data_ingestion = DataIngestion(self.data_ingestion_config, api_key)
         pages_and_text = data_ingestion.open_and_read_pdf(file_path)
         pages_and_text = data_ingestion.sentencize_and_chunk(pages_and_text)
-        pages_and_chunks = data_ingestion.split_chunks(pages_and_text, file_path)
+        pages_and_chunks = data_ingestion.split_chunks(pages_and_text, book_name, file_path)
         pages_and_chunks_over_min_token_len = data_ingestion.embed_chunks(pages_and_chunks)
-        data_ingestion.to_vector_database(pages_and_chunks_over_min_token_len, index_name)
+        data_ingestion.to_vector_database(pages_and_chunks_over_min_token_len, index_name = "library")
 
 
-    def store_tokens(self, api_key, file_path, index_name):
+    def store_tokens(self, api_key, file_path, index_name = "library"):
         data_ingestion = DataIngestion(self.data_ingestion_config, api_key)
         pages_and_text = data_ingestion.open_and_read_pdf(file_path)
         pages_and_text = data_ingestion.sentencize_and_chunk(pages_and_text)

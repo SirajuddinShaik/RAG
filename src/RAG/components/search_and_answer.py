@@ -5,7 +5,7 @@ import torch
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from pinecone import Pinecone
+from pinecone.grpc import PineconeGRPC as Pinecone
 
 from RAG.entity.config_entity import SearchConfig
 from RAG.utils.common import setup_env
@@ -20,20 +20,8 @@ class SearchAndAnswer:
             model_name_or_path=self.config.embed_model_name,
             device=self.config.device_name,
         )
-        nutrition = pd.read_csv(config.data_file)
-        nutrition.set_index("index", inplace=True)
-        self.dfs = {
-            "slot-1": pd.DataFrame(),
-            "slot-2": pd.DataFrame(),
-            "slot-3": pd.DataFrame(),
-            "nutrition": nutrition,
-        }
-        self.paths = {
-            "slot-1": "",
-            "slot-2": "",
-            "slot-3": "",
-            "nutrition": "note",
-        }
+        self.library = pd.read_csv(config.data_file)
+        self.library.set_index("index", inplace=True)
         if self.config.device_name == "cuda":
             self.chat = LLAMA["system-u"].format(msg="You are a helpful AI assistant")
             self.tokenizer = AutoTokenizer.from_pretrained(
@@ -42,14 +30,6 @@ class SearchAndAnswer:
             self.llm_model = llm_model
         else:
             pass
-
-    def setup_pd(self, paths):
-        for slot in paths:
-            path = paths[slot]
-            if path != "":
-                self.dfs[slot] = pd.read_csv(f"{path}.csv")
-                self.dfs[slot].set_index("index", inplace=True)
-        self.paths = paths
 
     def retrive_similar_enbeddings(self, query: str, index=None):
         if not index:
@@ -63,13 +43,21 @@ class SearchAndAnswer:
 
     def fetch_chunks(self, query_results, index):
         query_results = query_results["matches"]
-        print(index)
-        if self.paths[index] != "":
+        try :
+            
+
             for item in query_results:
-                item["sentence_chunk"] = self.dfs[index].loc[item["id"]][
+                item["sentence_chunk"] = self.library.loc[item["id"]][
                     "sentence_chunk"
                 ]
+                print(self.library.loc[item["id"]][
+                    "sentence_chunk"
+                ][:9])
+            
             return query_results
+        except Exception as e:
+            print(e)
+
 
     def prompt_formatter(
         self, query: str, context_items: list[dict], base_prompt: str
@@ -80,7 +68,7 @@ class SearchAndAnswer:
         # Join context items into one dotted paragraph
         context = "- " + "\n- ".join(
             [
-                "Index(" + item["id"] + ")-" + item["sentence_chunk"]
+                "(Book@index: " + item["id"] + ")-" + item["sentence_chunk"]
                 for item in context_items
             ]
         )
@@ -161,12 +149,17 @@ class SearchAndAnswer:
             return None
 
     def ask(self, query, context_items, prompt_type, hf_key, model, index):
-        context = "- " + "\n- ".join(
-            [
-                "Index[" + item["id"] + "]-" + item["sentence_chunk"]
-                for item in context_items
-            ]
-        )
+        # context = "- " + "\n- ".join(
+        #     [
+        #         "(Book@Index: " + item["id"] + ")-" + item["sentence_chunk"]
+        #         for item in context_items
+        #     ]
+        # )
+        context=""
+        for item in context_items:
+            context+="(Book@Index: " + item["id"] + ")-" + item["sentence_chunk"]+"\n "
+        print(len(context_items))
+        # print(context[:10])
         if self.config.device_name == "cuda" and model == "Llama-3(gpu)":
             if index == "chat":
                 if prompt_type == "system":
@@ -252,8 +245,9 @@ class SearchAndAnswer:
 
         # Remove characters that are not in the allowed set
         cleaned_prompt = allowed_characters.sub("", prompt)
-        print(cleaned_prompt)
+        print(cleaned_prompt[:9])
         return cleaned_prompt
 
     def err_msg(self, msg):
         return [{"generated_text": msg}]
+ 

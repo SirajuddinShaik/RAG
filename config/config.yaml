@@ -5,6 +5,7 @@ data_ingestion:
   chunk_size: 10
   device_name: cuda
   model_name: all-mpnet-base-v2
+  data_file: artifacts/data_ingestion/library.csv
   min_token_length: 30
   index_name: rag-index
 
@@ -13,7 +14,7 @@ search_and_retrive:
   top_k: 4
   device_name: cuda
   embed_model_name: all-mpnet-base-v2
-  data_file: artifacts/data_ingestion/data.csv
+  data_file: artifacts/data_ingestion/library.csv
   model_id: meta-llama/Meta-Llama-3-8B-Instruct
 
 refusal_data_ingestion:
