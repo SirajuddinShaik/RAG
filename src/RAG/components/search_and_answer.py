@@ -110,27 +110,29 @@ class SearchAndAnswer:
         # Turn the output tokens into text
         output_text = self.tokenizer.decode(outputs[0])
         print(output_text)
-        if prompt_type == "chat":
-            self.chat = output_text
-        if format_answer_text:
-            # Replace special tokens and unnecessary help message
-            output_text = (
-                output_text.replace(base_prompt, "")
-                .replace(base_prompt, "")
-                .replace("<|begin_of_text|>", "")
-            )
+        self.chat = output_text
+        self.chat.replace("<|begin_of_text|>","")
+        output = output_text.split("<|eot_id|>")[-2]
+        # if format_answer_text:
+        #     # Replace special tokens and unnecessary help message
+        #     output_text = (
+        #         output_text.replace(base_prompt, "")
+        #         .replace(base_prompt, "")
+        #         .replace("<|begin_of_text|>", "")
+        #     )
 
-        # Only return the answer without the context items
-        if return_answer_only:
-            return output_text.replace("<|eot_id|>", "")
+        # # Only return the answer without the context items
+        # if return_answer_only:
+        #     return output_text.replace("<|eot_id|>", "")
 
-        return
+        return output.replace("<|start_header_id|>assistant<|end_header_id|>","")
 
     def ask_cpu(self, base_prompt, temperature, hf_key, model, max_new_tokens=512):
         API_URL = f"https://api-inference.huggingface.co/models/{model}"
         API_TOKEN = hf_key
         if "gemma" in model:
             base_prompt = GEMMA["user"].format(msg=base_prompt)
+        print(base_prompt)
         payload = {
             "inputs": base_prompt,
             "parameters": {
@@ -157,27 +159,23 @@ class SearchAndAnswer:
         # )
         context=""
         for item in context_items:
-            context+="(Book@Index: " + item["id"] + ")-" + item["sentence_chunk"]+"\n "
-        print(len(context_items))
+            context+="(BookName@Index: " + item["id"] + ")-" + item["sentence_chunk"]+"\n "
+        # print(len(context_items))
         # print(context[:10])
         if self.config.device_name == "cuda" and model == "Llama-3(gpu)":
-            if index == "chat":
-                if prompt_type == "system":
-                    self.chat = ""
-                if prompt_type not in ["chat", "system"]:
-                    return "currently chat or system is suported for llama 3 gpu"
+            if prompt_type == "system":
+                self.chat = ""
+            if prompt_type in ["chat", "system"]:
                 prompt = LLAMA[prompt_type].format(msg=query)
-                self.chat += prompt
-                answer = self.ask_gpu(self.chat, 1, prompt_type)
+                print("prompt: "+prompt)
+                answer = self.ask_gpu(self.chat+prompt, 1, prompt_type)
             else:
                 prompt_set = PROMPTS[prompt_type]
                 base_prompt = prompt_set["prompt"].format(context=context, query=query)
-                prompt = (
-                    LLAMA["system"].format(msg="You are a helpful AI assistant")
-                    + "\n\n"
-                    + LLAMA["user"].format(msg=base_prompt)
-                )
-                answer = self.ask_gpu(prompt, prompt_set["temperature"], prompt_type)
+                prompt = LLAMA["user"].format(msg=base_prompt)
+                print("prompt: "+prompt)
+                answer = self.ask_gpu(self.chat+prompt, prompt_set["temperature"], prompt_type)
+            
             return answer
         elif prompt_type != "system" and model != "Llama-3(gpu)":
             prompt_set = PROMPTS3[prompt_type]

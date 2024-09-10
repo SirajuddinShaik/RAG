@@ -22,7 +22,8 @@ class SearchAnswerPipeline:
 
     def chainlit_prompt(self, query: str, prompt: str, pc_key, hf_key, index, model):
         try:
-            if index != "chat":
+            print(prompt,index,model,query)
+            if prompt not in ["chat", "system"] and index !="chat":
                 query_embeddings = self.query_answer.retrive_similar_enbeddings(
                     query, index
                 )
@@ -33,7 +34,6 @@ class SearchAnswerPipeline:
             output_text = self.query_answer.ask(
                 query, query_results, prompt, hf_key, model, index
             )
-            print(output_text)
             return output_text
         except Exception as e:
             print(e)
