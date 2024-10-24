@@ -1,6 +1,7 @@
 # RAG - Retrieval Augmented Generation
-Tutorial Desktop: [Video](https://www.linkedin.com/posts/shaik-sirajuddin-144484243_ai-machinelearning-rag-activity-7211332250167042048-3s3W?utm_source=share&utm_medium=member_desktop)
-Tutorial Android: [Video](https://www.linkedin.com/posts/sirajuddin-shaik-_ai-machinelearning-rag-activity-7211332250167042048-DW9P?utm_source=share&utm_medium=member_android)
+- Tutorial Desktop: [Video](https://www.linkedin.com/posts/shaik-sirajuddin-144484243_ai-machinelearning-rag-activity-7211332250167042048-3s3W?utm_source=share&utm_medium=member_desktop)
+
+- Tutorial Android: [Video](https://www.linkedin.com/posts/sirajuddin-shaik-_ai-machinelearning-rag-activity-7211332250167042048-DW9P?utm_source=share&utm_medium=member_android)
 ## Overview
 
 RAG leverages Meta Llama 3 (8B parameters) on GPU and Hugging Face API models on CPU. It supports two primary functionalities:
