@@ -75,6 +75,7 @@ async def on_message(msg: cl.Message):
             )
         msg = cl.Message(content=output_text)
         await msg.send()
+        return
     if not cl.user_session.get("api_status"):
         msg1 = cl.ErrorMessage(content=cl.user_session.get("err"))
         await msg1.send()
