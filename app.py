@@ -7,6 +7,7 @@ import chainlit as cl
 from tqdm.auto import tqdm
 
 from RAG.pipeline.stage_01_data_ingestion import DataIngestionPipeLine
+from RAG.pipeline.internet_query import InternetQueryPipeLine
 from RAG.pipeline.stage_02_search_answer import SearchAnswerPipeline
 from RAG.utils.wigets import *
 
@@ -14,7 +15,11 @@ llm_model = None
 import torch
 
 if torch.cuda.is_available(): # which attention version to use
-    llm_model = get_model()
+    llm_model ,tokenizer= get_model()
+
+# internet Query
+internet_query_obj = InternetQueryPipeLine()
+
 
 @cl.on_chat_start
 async def start():
@@ -42,20 +47,34 @@ async def start():
         ]
     ).send()
 
-    model1 = settings["Model"]
-    model2 = settings["Query"]
-    api_key = settings["hf_key"]
-
-    # You can now use the api_key variable in your application
-    print(f"API Key: {api_key}")
-    print(f"Selected Model 1: {model1}")
-    print(f"Selected Model 2: {model2}")
-
 
 @cl.on_message
 async def on_message(msg: cl.Message):
     query = msg.content
     print(cl.user_session.get("paths"))
+    if cl.user_session.get("task") == "internet_query" and torch.cuda.is_available():
+        msg = cl.Message(content="")
+        await msg.send()
+        prompt = internet_query_obj.main(query=query)
+        input_ids = tokenizer(prompt, return_tensors="pt").to(
+            "cuda" if torch.cuda.is_available() else "cpu"
+        )
+
+        # Generate an output of tokens
+        outputs = llm_model.generate(
+            **input_ids,
+            temperature=0.7,
+            do_sample=True,
+            max_new_tokens=512,
+        )
+        output_text = tokenizer.decode(outputs[0])
+        output_text = (
+                output_text.replace(prompt, "")
+                .replace(prompt, "")
+                .replace("<|begin_of_text|>", "")
+            )
+        msg = cl.Message(content=output_text)
+        await msg.send()
     if not cl.user_session.get("api_status"):
         msg1 = cl.ErrorMessage(content=cl.user_session.get("err"))
         await msg1.send()

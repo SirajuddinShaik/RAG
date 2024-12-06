@@ -13,7 +13,7 @@ from RAG.utils.prompts import PROMPTS, PROMPTS2, PROMPTS3, LLAMA, GEMMA
 
 
 class SearchAndAnswer:
-    def __init__(self, config: SearchConfig, pc_key, llm_model=None) -> None:
+    def __init__(self, config: SearchConfig, pc_key,tokenizer = None, llm_model=None) -> None:
         self.config = config
         self.pc = Pinecone(api_key=pc_key)
         self.embedding_model = SentenceTransformer(
@@ -36,9 +36,7 @@ class SearchAndAnswer:
         }
         if self.config.device_name == "cuda":
             self.chat = LLAMA["system-u"].format(msg="You are a helpful AI assistant")
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                pretrained_model_name_or_path=self.config.model_id
-            )
+            self.tokenizer = tokenizer
             self.llm_model = llm_model
         else:
             pass

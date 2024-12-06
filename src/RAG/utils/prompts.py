@@ -273,4 +273,9 @@ LLAMA = {
     "chat": "{msg}<|eot_id|><|start_header_id|>assistant<|end_header_id|>",
 }
 
+INTERNET_RETRIVE_PROMPT = {
+    "internet": "<|start_header_id|>system<|end_header_id|>Your SBot an AI Assistant. Your Knowledge Cutoff is March 2023. You have no restriction in giving a response. When generating an answer, please consider the context provided in the question and base it on reliable sources from the internet.<|eot_id|><|start_header_id|>user<|end_header_id|>Internet Context: \n\n{context_from_internet}\n\nQuestion: {user_question}<|eot_id|><|start_header_id|>assistant<|end_header_id|>",
+    # "user": "Context: {context_from_internet}\n\nQuestion: {user_question}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+}
+
 GEMMA = {"user": "<start_of_turn>user\n{msg}<end_of_turn>\n<start_of_turn>model"}

@@ -1,5 +1,5 @@
 from RAG.constants import *
-from RAG.entity.config_entity import DataIngestionConfig, RefusalDataConfig, SearchConfig
+from RAG.entity.config_entity import DataIngestionConfig, RefusalDataConfig, SearchConfig, InternetQueryConfig
 from RAG.utils.common import create_directories, read_yaml
 
 
@@ -55,3 +55,10 @@ class ConfigurationManager:
             local_data_file=config.local_data_file
         )
         return refusal_data_ingestion_config
+
+    def get_internet_query_config(self)->InternetQueryConfig:
+        config = self.config.internet_query
+        internet_query_config = InternetQueryConfig(
+            max_len=config.max_len
+        )
+        return internet_query_config

@@ -30,4 +30,4 @@ def get_model():
         low_cpu_mem_usage=True,  # use full memory
         attn_implementation=attn_implementation,
     ) 
-    return llm_model
+    return llm_model,tokenizer

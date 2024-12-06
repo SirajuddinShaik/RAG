@@ -25,3 +25,8 @@ class SearchConfig:
 class RefusalDataConfig:
     source_uri: str
     local_data_file: Path
+
+
+@dataclass(frozen=True)
+class InternetQueryConfig:
+    max_len: int

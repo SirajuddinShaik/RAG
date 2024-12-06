@@ -22,3 +22,6 @@ transformers
 torch
 datasets
 chainlit
+
+
+googlesearch-python

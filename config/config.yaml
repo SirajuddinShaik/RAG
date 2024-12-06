@@ -19,3 +19,6 @@ search_and_retrive:
 refusal_data_ingestion:
   source_uri: https://raw.githubusercontent.com/llm-attacks/llm-attacks/main/data/advbench/harmful_behaviors.csv
   local_data_file: artifacts/data_ingestion/harmfull_data_set.csv
+
+internet_query:
+  max_len: 5000

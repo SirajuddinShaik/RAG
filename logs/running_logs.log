@@ -1843,3 +1843,21 @@ AttributeError: 'RefusalDataIngestion' object has no attribute 'config'
 [2024-07-01 16:23:11,415: INFO: common: yaml file: schema.yaml loaded successfully]
 [2024-07-01 16:23:14,238: INFO: config: PyTorch version 2.2.1+cu121 available.]
 [2024-07-01 16:23:14,665: INFO: refusal_data_ingestion: File Already Exist!]
+[2024-12-05 17:07:30,958: INFO: internet_query: >>>>>>>> Internet Query stage Started <<<<<<<<<<<<]
+[2024-12-05 17:07:30,962: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-12-05 17:07:30,963: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-12-05 17:07:30,963: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-12-05 17:07:38,647: ERROR: internet_query: sequence item 0: expected str instance, dict found]
+Traceback (most recent call last):
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/internet_query.py", line 32, in <module>
+    prompt = obj.main("What is Python?")
+  File "/teamspace/studios/this_studio/RAG/src/RAG/pipeline/internet_query.py", line 21, in main
+    summerized_content = internet_query.summarize_content(scrape_data,query=query)
+  File "/teamspace/studios/this_studio/RAG/src/RAG/components/internet_scrape.py", line 77, in summarize_content
+    content = "---".join(content)
+TypeError: sequence item 0: expected str instance, dict found
+[2024-12-05 17:09:34,935: INFO: internet_query: >>>>>>>> Internet Query stage Started <<<<<<<<<<<<]
+[2024-12-05 17:09:34,939: INFO: common: yaml file: config/config.yaml loaded successfully]
+[2024-12-05 17:09:34,940: INFO: common: yaml file: params.yaml loaded successfully]
+[2024-12-05 17:09:34,941: INFO: common: yaml file: schema.yaml loaded successfully]
+[2024-12-05 17:12:21,877: INFO: internet_query: >>>>>>>> Internet Query stage Completed <<<<<<<<<<]

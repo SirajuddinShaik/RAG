@@ -19,6 +19,7 @@ query_type = Select(
     label="Select Task - Type",
     values=[
         "chat",
+        "internet_query",
         "system",
         "detailed_prompt",
         "short_prompt",
